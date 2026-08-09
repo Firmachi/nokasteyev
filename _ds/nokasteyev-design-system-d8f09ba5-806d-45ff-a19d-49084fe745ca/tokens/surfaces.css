@@ -1,0 +1,20 @@
+:root{
+/* Corner radii — the archive is square. Radius is reserved for controls only. */
+--radius-none:0;--radius-control:2px;--radius-pill:999px;
+/* Borders */
+--border-hairline:1px solid var(--line-hairline);--border-strong:1px solid var(--line-strong);
+/* Shadows — paintings sit on paper, so shadows are soft, warm and low */
+--shadow-plate:0 1px 2px rgba(20,18,15,.06),0 12px 32px rgba(20,18,15,.10);
+--shadow-plate-hover:0 2px 4px rgba(20,18,15,.08),0 24px 56px rgba(20,18,15,.16);
+--shadow-inset-well:inset 0 0 0 1px rgba(20,18,15,.08);
+/* Protection gradient over archival photography */
+--scrim-bottom:linear-gradient(to top,rgba(10,10,10,.78) 0%,rgba(10,10,10,.32) 45%,rgba(10,10,10,0) 100%); /* @kind other */
+--scrim-full:linear-gradient(to bottom,rgba(10,10,10,.45),rgba(10,10,10,.65)); /* @kind other */
+/* Archival treatment for background photography */
+--filter-archive:grayscale(1) contrast(1.06) brightness(.86); /* @kind other */
+--filter-archive-soft:grayscale(1) contrast(.96) brightness(1.02); /* @kind other */
+/* Motion — slow, museum-paced, no bounce */
+--ease-archive:cubic-bezier(.22,.61,.36,1); /* @kind other */--ease-veil:cubic-bezier(.4,0,.2,1); /* @kind other */
+--dur-fast:180ms; /* @kind other */--dur-base:420ms; /* @kind other */--dur-slow:900ms; /* @kind other */--dur-era:1400ms; /* @kind other */
+--z-backdrop:0; /* @kind other */--z-content:10; /* @kind other */--z-header:100; /* @kind other */--z-overlay:200; /* @kind other */
+}

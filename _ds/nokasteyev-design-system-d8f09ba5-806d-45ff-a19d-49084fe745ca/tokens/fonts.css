@@ -1,0 +1,5 @@
+/* noKasteyev webfonts — served from Google Fonts CDN.
+   SUBSTITUTION NOTE: no original font binaries were supplied with the brief.
+   Bodoni Moda stands in for the high-contrast didone display seen in the reference
+   archives; Archivo for the neutral grotesque UI face; EB Garamond for editorial italics. */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Archivo:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');

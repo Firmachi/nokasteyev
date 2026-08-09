@@ -1,0 +1,13 @@
+:root{
+--font-display:'Bodoni Moda',Didot,'Times New Roman',serif;
+--font-editorial:'EB Garamond',Georgia,serif;
+--font-ui:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+/* Display — didone, tight leading, optical sizes */
+--type-display-1:clamp(64px,9vw,148px);--type-display-2:clamp(44px,6vw,96px);--type-display-3:clamp(32px,3.6vw,56px);
+--type-title:32px;--type-subtitle:24px;
+--type-body-lg:19px;--type-body:16px;--type-body-sm:14px;
+--type-caption:12px;--type-micro:10px;
+--leading-display:0.92;--leading-title:1.15;--leading-body:1.6;--leading-caption:1.35;
+--tracking-display:-0.02em;--tracking-body:0;--tracking-label:0.16em;--tracking-micro:0.22em;
+--weight-regular:400;--weight-medium:500;--weight-bold:700;
+}

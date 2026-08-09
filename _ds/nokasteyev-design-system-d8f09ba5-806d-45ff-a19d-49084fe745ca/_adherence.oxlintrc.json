@@ -1,0 +1,413 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/content/**",
+              "components/core/**",
+              "components/gallery/**",
+              "components/navigation/**",
+              "ui_kits/gallery/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Bodoni Moda|Archivo|EB Garamond))/i]",
+        "message": "Font not provided by the design system. Available: Bodoni Moda, Archivo, EB Garamond."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArtistCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:portrait|name|years|discipline|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<ArtistCard> doesn't accept that prop. Declared props: portrait, name, years, discipline, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArtworkCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:src|title|artist|year|offset|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<ArtworkCard> doesn't accept that prop. Declared props: src, title, artist, year, offset, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArtworkPlate'] > JSXAttribute > JSXIdentifier[name!=/^(?:src|title|artist|year|medium|caption|size|align|style|key|ref|className|style|children)$/]",
+        "message": "<ArtworkPlate> doesn't accept that prop. Declared props: src, title, artist, year, medium, caption, size, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArtworkPlate'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<ArtworkPlate> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArtworkPlate'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center)$/]",
+        "message": "<ArtworkPlate> align must be one of 'left' | 'center'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|size|icon|iconAfter|onArchive|disabled|href|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, size, icon, iconAfter, onArchive, disabled, href, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='EraBackdrop'] > JSXAttribute > JSXIdentifier[name!=/^(?:src|position|scrim|fixed|grain|children|style|key|ref|className|style|children)$/]",
+        "message": "<EraBackdrop> doesn't accept that prop. Declared props: src, position, scrim, fixed, grain, children, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='EraBackdrop'] > JSXAttribute[name.name='scrim'] > Literal[value!=/^(?:none|bottom|full)$/]",
+        "message": "<EraBackdrop> scrim must be one of 'none' | 'bottom' | 'full'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='FactListItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|value|note|key|ref|className|style|children)$/]",
+        "message": "<FactListItem> doesn't accept that prop. Declared props: label, value, note."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Icon'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|size|color|strokeWidth|style|key|ref|className|style|children)$/]",
+        "message": "<Icon> doesn't accept that prop. Declared props: name, size, color, strokeWidth, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='IconButton'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|label|size|onArchive|onClick|style|key|ref|className|style|children)$/]",
+        "message": "<IconButton> doesn't accept that prop. Declared props: name, label, size, onArchive, onClick, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='IndexOverlayItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|meta|id|key|ref|className|style|children)$/]",
+        "message": "<IndexOverlayItem> doesn't accept that prop. Declared props: label, meta, id."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='LifeTimelineEntry'] > JSXAttribute > JSXIdentifier[name!=/^(?:year|text|emphasis|key|ref|className|style|children)$/]",
+        "message": "<LifeTimelineEntry> doesn't accept that prop. Declared props: year, text, emphasis."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Lightbox'] > JSXAttribute > JSXIdentifier[name!=/^(?:open|src|title|artist|year|medium|onClose|onPrev|onNext|style|key|ref|className|style|children)$/]",
+        "message": "<Lightbox> doesn't accept that prop. Declared props: open, src, title, artist, year, medium, onClose, onPrev, onNext, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Prose'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|lead|onArchive|style|key|ref|className|style|children)$/]",
+        "message": "<Prose> doesn't accept that prop. Declared props: children, lead, onArchive, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PullQuote'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|attribution|source|onArchive|style|key|ref|className|style|children)$/]",
+        "message": "<PullQuote> doesn't accept that prop. Declared props: children, attribution, source, onArchive, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SectionHeading'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|eyebrow|level|align|onArchive|rule|style|key|ref|className|style|children)$/]",
+        "message": "<SectionHeading> doesn't accept that prop. Declared props: children, eyebrow, level, align, onArchive, rule, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SectionHeading'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center)$/]",
+        "message": "<SectionHeading> align must be one of 'left' | 'center'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SiteHeaderNavItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|label|key|ref|className|style|children)$/]",
+        "message": "<SiteHeaderNavItem> doesn't accept that prop. Declared props: id, label."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tag'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|onArchive|style|key|ref|className|style|children)$/]",
+        "message": "<Tag> doesn't accept that prop. Declared props: children, tone, onArchive, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tag'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:neutral|ink|pigment)$/]",
+        "message": "<Tag> tone must be one of 'neutral' | 'ink' | 'pigment'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TimelineScrubber'] > JSXAttribute > JSXIdentifier[name!=/^(?:years|value|onChange|onArchive|hint|style|key|ref|className|style|children)$/]",
+        "message": "<TimelineScrubber> doesn't accept that prop. Declared props: years, value, onChange, onArchive, hint, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Wordmark'] > JSXAttribute > JSXIdentifier[name!=/^(?:size|onArchive|subtitle|style|key|ref|className|style|children)$/]",
+        "message": "<Wordmark> doesn't accept that prop. Declared props: size, onArchive, subtitle, style."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "ArtistCard": {
+        "replaces": []
+      },
+      "ArtworkCard": {
+        "replaces": []
+      },
+      "ArtworkPlate": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "EraBackdrop": {
+        "replaces": []
+      },
+      "FactListItem": {
+        "replaces": []
+      },
+      "Icon": {
+        "replaces": []
+      },
+      "IconButton": {
+        "replaces": []
+      },
+      "IndexOverlayItem": {
+        "replaces": []
+      },
+      "LifeTimelineEntry": {
+        "replaces": []
+      },
+      "Lightbox": {
+        "replaces": []
+      },
+      "Prose": {
+        "replaces": []
+      },
+      "PullQuote": {
+        "replaces": []
+      },
+      "SectionHeading": {
+        "replaces": []
+      },
+      "SiteHeaderNavItem": {
+        "replaces": []
+      },
+      "Tag": {
+        "replaces": []
+      },
+      "TimelineScrubber": {
+        "replaces": []
+      },
+      "Wordmark": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--border-hairline",
+      "--border-strong",
+      "--dur-base",
+      "--dur-era",
+      "--dur-fast",
+      "--dur-slow",
+      "--ease-archive",
+      "--ease-veil",
+      "--filter-archive",
+      "--filter-archive-soft",
+      "--focus-ring",
+      "--font-display",
+      "--font-editorial",
+      "--font-ui",
+      "--gutter-page",
+      "--ink-0",
+      "--ink-1",
+      "--ink-2",
+      "--ink-3",
+      "--ink-4",
+      "--leading-body",
+      "--leading-caption",
+      "--leading-display",
+      "--leading-title",
+      "--line-hairline",
+      "--line-on-archive",
+      "--line-strong",
+      "--measure",
+      "--measure-narrow",
+      "--paper-0",
+      "--paper-1",
+      "--paper-2",
+      "--paper-3",
+      "--pigment-indigo",
+      "--pigment-madder",
+      "--pigment-ochre",
+      "--pigment-steppe",
+      "--pigment-terracotta",
+      "--radius-control",
+      "--radius-none",
+      "--radius-pill",
+      "--rail-header",
+      "--scrim-bottom",
+      "--scrim-full",
+      "--shadow-inset-well",
+      "--shadow-plate",
+      "--shadow-plate-hover",
+      "--silver-0",
+      "--silver-1",
+      "--silver-2",
+      "--silver-3",
+      "--silver-4",
+      "--space-1",
+      "--space-10",
+      "--space-11",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--surface-archive",
+      "--surface-page",
+      "--surface-plate",
+      "--surface-raised",
+      "--surface-sunken",
+      "--text-accent",
+      "--text-body",
+      "--text-display",
+      "--text-faint",
+      "--text-muted",
+      "--text-on-archive",
+      "--tracking-body",
+      "--tracking-display",
+      "--tracking-label",
+      "--tracking-micro",
+      "--type-body",
+      "--type-body-lg",
+      "--type-body-sm",
+      "--type-caption",
+      "--type-display-1",
+      "--type-display-2",
+      "--type-display-3",
+      "--type-micro",
+      "--type-subtitle",
+      "--type-title",
+      "--weight-bold",
+      "--weight-medium",
+      "--weight-regular",
+      "--z-backdrop",
+      "--z-content",
+      "--z-header",
+      "--z-overlay"
+    ],
+    "tokenKinds": {
+      "--paper-0": "color",
+      "--paper-1": "color",
+      "--paper-2": "color",
+      "--paper-3": "color",
+      "--ink-0": "color",
+      "--ink-1": "color",
+      "--ink-2": "color",
+      "--ink-3": "color",
+      "--ink-4": "color",
+      "--silver-0": "color",
+      "--silver-1": "color",
+      "--silver-2": "color",
+      "--silver-3": "color",
+      "--silver-4": "color",
+      "--pigment-ochre": "color",
+      "--pigment-terracotta": "color",
+      "--pigment-steppe": "color",
+      "--pigment-indigo": "color",
+      "--pigment-madder": "color",
+      "--surface-page": "color",
+      "--surface-raised": "color",
+      "--surface-sunken": "color",
+      "--surface-archive": "color",
+      "--surface-plate": "color",
+      "--text-display": "font",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-faint": "font",
+      "--text-on-archive": "font",
+      "--text-accent": "font",
+      "--line-hairline": "color",
+      "--line-strong": "color",
+      "--line-on-archive": "color",
+      "--focus-ring": "color",
+      "--font-display": "font",
+      "--font-editorial": "font",
+      "--font-ui": "font",
+      "--type-display-1": "font",
+      "--type-display-2": "font",
+      "--type-display-3": "font",
+      "--type-title": "font",
+      "--type-subtitle": "font",
+      "--type-body-lg": "font",
+      "--type-body": "font",
+      "--type-body-sm": "font",
+      "--type-caption": "font",
+      "--type-micro": "font",
+      "--leading-display": "font",
+      "--leading-title": "font",
+      "--leading-body": "font",
+      "--leading-caption": "font",
+      "--tracking-display": "font",
+      "--tracking-body": "font",
+      "--tracking-label": "font",
+      "--tracking-micro": "font",
+      "--weight-regular": "font",
+      "--weight-medium": "font",
+      "--weight-bold": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--space-10": "spacing",
+      "--space-11": "spacing",
+      "--gutter-page": "spacing",
+      "--measure": "other",
+      "--measure-narrow": "other",
+      "--rail-header": "spacing",
+      "--radius-none": "radius",
+      "--radius-control": "radius",
+      "--radius-pill": "radius",
+      "--border-hairline": "color",
+      "--border-strong": "color",
+      "--shadow-plate": "shadow",
+      "--shadow-plate-hover": "shadow",
+      "--shadow-inset-well": "shadow",
+      "--scrim-bottom": "other",
+      "--scrim-full": "other",
+      "--filter-archive": "other",
+      "--filter-archive-soft": "other",
+      "--ease-archive": "other",
+      "--ease-veil": "other",
+      "--dur-fast": "other",
+      "--dur-base": "other",
+      "--dur-slow": "other",
+      "--dur-era": "other",
+      "--z-backdrop": "other",
+      "--z-content": "other",
+      "--z-header": "other",
+      "--z-overlay": "other"
+    },
+    "fontFamilies": [
+      "Archivo",
+      "Bodoni Moda",
+      "EB Garamond"
+    ]
+  }
+}

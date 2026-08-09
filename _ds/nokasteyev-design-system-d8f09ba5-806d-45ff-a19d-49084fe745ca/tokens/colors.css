@@ -1,0 +1,18 @@
+:root{
+/* Paper — warm archival stock */
+--paper-0:#FBF8F3;--paper-1:#F3EFE7;--paper-2:#EAE4D9;--paper-3:#DED6C8;
+/* Ink — never pure black */
+--ink-0:#14120F;--ink-1:#2A2621;--ink-2:#4A443C;--ink-3:#6E665B;--ink-4:#9A9184;
+/* Archive silver — for b&w photographic fields */
+--silver-0:#1A1A1A;--silver-1:#3D3D3D;--silver-2:#6B6B6B;--silver-3:#B4B4B4;--silver-4:#E2E0DC;
+/* Pigment — sparing accents pulled from mid-century Kazakh painting */
+--pigment-ochre:#B8862F;--pigment-terracotta:#A2503A;--pigment-steppe:#5C6A4A;
+--pigment-indigo:#2E4057;--pigment-madder:#7E2B24;
+/* Semantic */
+--surface-page:var(--paper-1);--surface-raised:var(--paper-0);--surface-sunken:var(--paper-2);
+--surface-archive:var(--silver-0);--surface-plate:var(--paper-0);
+--text-display:var(--ink-0);--text-body:var(--ink-1);--text-muted:var(--ink-3);--text-faint:var(--ink-4);
+--text-on-archive:var(--paper-1);--text-accent:var(--pigment-terracotta);
+--line-hairline:rgba(20,18,15,.14);--line-strong:rgba(20,18,15,.34);--line-on-archive:rgba(251,248,243,.22);
+--focus-ring:var(--pigment-ochre);
+}

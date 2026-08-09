@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/surfaces.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/grain.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/base.css">
+  <link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/styles.css">
+  <script src="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/_ds_bundle.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&amp;family=Golos+Text:wght@400;500&amp;display=swap">
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: var(--silver-0); }
+    :root { --font-display: 'Bodoni Moda', 'Playfair Display', Didot, 'Times New Roman', serif; --font-ui: 'Archivo', 'Golos Text', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: var(--pigment-terracotta); text-decoration: none; }
+    a:hover { color: var(--pigment-ochre); }
+    ::selection { background: var(--pigment-ochre); color: var(--paper-0); }
+    #nk-rail::-webkit-scrollbar, #nk-intro::-webkit-scrollbar { display: none; }
+    #nk-rail, #nk-intro { scrollbar-width: none; }
+    [data-on-archive] img[src*="lucide-static"] { filter: invert(1); opacity: 1; }
+    [data-plate-rail] a { display: flex !important; flex-direction: column !important; height: 100%; }
+    [data-plate-rail] a { width: fit-content !important; align-items: flex-start; }
+    [data-plate-rail] a > img { flex: 0 1 auto; min-height: 0; width: auto !important; height: auto; align-self: flex-start; max-height: clamp(170px, 34vh, 360px); max-width: min(34vw, 420px); object-fit: contain; }
+    [data-plate-rail] a > *:not(img) { width: 0; min-width: 100%; }
+    [data-plate-rail] a > *:not(img), [data-plate-rail] a > *:not(img) * { color: var(--paper-1) !important; }
+    [data-plate-rail] a > *:not(img) *:last-child { color: var(--paper-3) !important; }
+    [data-facts-plain] * { border-top: 0 !important; }
+    [data-chron-row] { border-top: 0 !important; }
+    #nk-chronicle-head * { border-top: 0 !important; border-bottom: 0 !important; }
+    @keyframes nkDrift { from { transform: translateY(0); } to { transform: translateY(6px); } }
+    @keyframes nkFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  </style>
+</helmet>
+
+<sc-if value="{{ introOpen }}" hint-placeholder-val="{{ true }}">
+  <div style="{{ introStyle }}">
+    <div id="nk-intro" style="position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y proximity;background:var(--surface-page)">
+      <div class="nk-grain" style="position:fixed;inset:0;pointer-events:none;opacity:.35"></div>
+      <div style="position:fixed;top:var(--space-5);right:var(--gutter-page);z-index:3;display:flex;align-items:center;gap:var(--space-4)">
+        <sc-for list="{{ langsInk }}" as="lang" hint-placeholder-count="3">
+          <button onClick="{{ lang.go }}" style="{{ lang.style }}">{{ lang.label }}</button>
+        </sc-for>
+      </div>
+
+      <section style="position:relative;min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--space-5);padding:var(--space-9) var(--gutter-page)">
+        <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.eyebrow }}</div>
+        <h1 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--type-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-display)"><span style="font-style:italic;color:var(--text-faint)">no</span>Kasteyev</h1>
+        <div style="max-width:46ch;font-family:var(--font-editorial);font-style:italic;font-size:var(--type-body-lg);line-height:1.5;color:var(--text-body)">{{ L.tagline }}</div>
+        <div style="position:absolute;left:0;right:0;bottom:var(--space-8);display:flex;flex-direction:column;align-items:center;gap:var(--space-3);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">
+          <span>{{ L.scrollToRead }}</span>
+          <span style="display:block;width:1px;height:56px;background:var(--line-strong);animation:nkDrift 2600ms ease-in-out infinite alternate"></span>
+        </div>
+      </section>
+
+      <section style="min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:grid;grid-template-columns:42% minmax(0,1fr);border-top:1px solid var(--line-hairline)">
+        <div style="position:relative;overflow:hidden;background:var(--surface-archive)">
+          <img src="assets/era-1960.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--filter-archive)">
+          <div class="nk-grain" style="position:absolute;inset:0;pointer-events:none;opacity:.55"></div>
+          <div style="position:absolute;left:var(--space-7);bottom:var(--space-7);right:var(--space-7);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-2)">{{ L.archiveCaption }}</div>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;justify-content:center;padding:var(--space-10) var(--gutter-page);box-sizing:border-box">
+          <div style="display:flex;flex-direction:column;gap:var(--space-7);max-width:54ch">
+            <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.whatThisIs }}</div>
+            <p style="margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(28px,3vw,48px);line-height:1.16;letter-spacing:var(--tracking-display);color:var(--text-display);text-wrap:pretty">{{ L.whatLead }}</p>
+            <div style="padding-top:var(--space-6);border-top:1px solid var(--line-hairline)">
+              <p style="margin:0;font-family:var(--font-ui);font-size:var(--type-body);line-height:var(--leading-body);color:var(--text-muted);text-wrap:pretty">{{ L.whatBody }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;gap:var(--space-8);padding:var(--space-10) var(--gutter-page);border-top:1px solid var(--line-hairline)">
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SectionHeading" eyebrow="{{ L.howToRead }}" level="{{ 2 }}" hint-size="100%,120px">{{ L.howHeading }}</x-import>
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,80px">{{ L.howBody }}</x-import>
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.FactList" items="{{ introFacts }}" columns="{{ 4 }}" hint-size="100%,100px"></x-import>
+        <div style="display:flex;align-items:center;gap:var(--space-6);margin-top:var(--space-4)">
+          <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Button" size="lg" on-click="{{ enterArchive }}" icon-after="arrow-right" hint-size="auto,48px">{{ L.enterArchive }}</x-import>
+          <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.orKeepScrolling }}</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</sc-if>
+
+<div style="position:fixed;inset:0;z-index:0;background:var(--surface-archive);overflow:hidden">
+  <sc-for list="{{ backdrops }}" as="bg" hint-placeholder-count="1">
+    <img src="{{ bg.src }}" alt="" style="{{ bg.style }}">
+  </sc-for>
+  <div class="nk-grain" style="position:absolute;inset:0;pointer-events:none;opacity:.55"></div>
+</div>
+
+<div style="position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(to bottom,rgba(10,10,10,.74),rgba(10,10,10,0))">
+  <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SiteHeader" items="{{ navItems }}" active="{{ activeDecadeId }}" on-navigate="{{ goToDecade }}" on-menu="{{ openIndex }}" on-archive="{{ true }}" data-on-archive="true" style="border-bottom:1px solid var(--line-on-archive)" hint-size="100%,64px"></x-import>
+</div>
+
+<div data-on-archive="true" style="position:fixed;top:0;right:var(--gutter-page);height:var(--rail-header);z-index:101;display:flex;align-items:center;gap:var(--space-5)">
+  <div style="display:flex;align-items:center;gap:var(--space-4)">
+    <sc-for list="{{ langs }}" as="lang" hint-placeholder-count="3">
+      <button onClick="{{ lang.go }}" style="{{ lang.style }}">{{ lang.label }}</button>
+    </sc-for>
+  </div>
+  
+</div>
+
+<div id="nk-rail" style="position:fixed;inset:0;z-index:10;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory">
+
+  <section data-panel="hero" style="flex:0 0 100vw;height:100vh;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--space-5);padding:var(--rail-header) var(--gutter-page) 180px;background:var(--scrim-full);box-sizing:border-box">
+    <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">{{ L.eyebrow }}</div>
+    <h1 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--type-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--paper-1)"><span style="font-style:italic;opacity:.42">no</span>Kasteyev</h1>
+    <div style="max-width:46ch;font-family:var(--font-editorial);font-style:italic;font-size:var(--type-body-lg);line-height:1.5;color:var(--paper-2)">{{ L.tagline }}</div>
+    <div data-on-archive="true" style="display:flex;gap:var(--space-4);margin-top:var(--space-4)">
+      <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Button" variant="secondary" on-archive="{{ true }}" on-click="{{ enterFirst }}" icon-after="arrow-right" hint-size="auto,40px">{{ L.enter1910 }}</x-import>
+      
+    </div>
+  </section>
+
+  <sc-for list="{{ decades }}" as="era" hint-placeholder-count="2">
+    <section data-decade="{{ era.year }}" data-screen-label="{{ era.year }}" style="flex:0 0 100vw;height:100vh;scroll-snap-align:start;box-sizing:border-box;padding:calc(var(--rail-header) + clamp(14px,3vh,48px)) var(--gutter-page) clamp(92px,13vh,150px);display:grid;grid-template-columns:minmax(280px,34%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:var(--space-8);align-items:stretch;background:linear-gradient(to right,rgba(10,10,10,.80),rgba(10,10,10,.46) 55%,rgba(10,10,10,.72))">
+
+      <div style="display:flex;flex-direction:column;justify-content:flex-start;gap:clamp(12px,2.2vh,32px);min-height:0;overflow:hidden">
+        <div>
+          <sc-if value="{{ era.first }}" hint-placeholder-val="{{ false }}">
+            <div data-on-archive="true" style="margin-bottom:var(--space-4);margin-left:-8px">
+              <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-left" label="{{ L.backToTitle }}" on-archive="{{ true }}" on-click="{{ era.back }}" hint-size="30px,30px"></x-import>
+            </div>
+          </sc-if>
+          <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3);margin-bottom:var(--space-4)">{{ era.range }}</div>
+          <div style="font-family:var(--font-display);font-weight:400;font-size:clamp(40px,8vh,92px);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--paper-1)">{{ era.year }}</div>
+          <h2 style="margin:var(--space-3) 0 0;font-family:var(--font-editorial);font-style:italic;font-weight:400;font-size:clamp(20px,3vh,32px);line-height:1.2;color:var(--paper-1)">{{ era.title }}</h2>
+        </div>
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" lead="{{ true }}" on-archive="{{ true }}" style="max-width:40ch" hint-size="100%,80px">{{ era.blurb }}</x-import>
+        <sc-if value="{{ roomy }}" hint-placeholder-val="{{ true }}">
+          <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.FactList" items="{{ era.facts }}" columns="{{ 2 }}" on-archive="{{ true }}" style="max-width:40ch" hint-size="100%,80px"></x-import>
+        </sc-if>
+        <div style="min-height:0;flex:0 1 auto;display:flex;flex-direction:column">
+          <div style="flex:0 0 auto;border-top:1px solid var(--line-on-archive);padding-top:var(--space-3);margin-bottom:var(--space-3);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">{{ era.artistsLabel }}</div>
+          <div data-nested-scroll="true" style="flex:1 1 auto;display:flex;align-items:stretch;gap:var(--space-5);min-height:0;overflow-x:auto;overflow-y:hidden;padding-bottom:var(--space-2)">
+            <sc-for list="{{ era.artists }}" as="artist" hint-placeholder-count="2">
+              <button onClick="{{ artist.open }}" style="{{ artistTileStyle }}">
+                <img src="{{ artist.portrait }}" alt="" title="{{ artist.name }}" style="flex:1 1 auto;min-height:0;height:auto;width:100%;object-fit:cover;object-position:50% 25%;filter:var(--filter-archive);background:var(--surface-archive)">
+                <span title="{{ artist.name }}" style="flex:0 0 auto;font-family:var(--font-display);font-size:clamp(12px,1.5vh,16px);line-height:1.2;color:var(--paper-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ artist.name }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div style="min-width:0;height:100%;display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line-on-archive);padding-top:var(--space-3);margin-bottom:var(--space-6);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">
+          <span>{{ L.platesFromDecade }}</span>
+          <span>{{ era.plateCount }}</span>
+        </div>
+        <div data-nested-scroll="true" data-plate-rail="true" style="flex:1;min-height:0;display:flex;gap:var(--space-6);align-items:stretch;overflow-x:auto;overflow-y:hidden;padding-bottom:var(--space-3)">
+          <sc-for list="{{ era.works }}" as="work" hint-placeholder-count="2">
+            <div style="flex:0 0 auto;width:fit-content;max-width:min(34vw,420px);min-width:0">
+              <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.ArtworkCard" src="{{ work.src }}" title="{{ work.title }}" artist="{{ work.artist }}" year="{{ work.year }}" on-click="{{ work.open }}" hint-size="220px,280px"></x-import>
+            </div>
+          </sc-for>
+          <sc-if value="{{ era.empty }}" hint-placeholder-val="{{ false }}">
+            <div style="max-width:38ch;padding-top:var(--space-6);font-family:var(--font-editorial);font-style:italic;font-size:var(--type-body-lg);line-height:1.5;color:var(--paper-3);border-left:1px solid var(--line-on-archive);padding-left:var(--space-6)">{{ era.emptyNote }}</div>
+          </sc-if>
+        </div>
+      </div>
+
+    </section>
+  </sc-for>
+</div>
+
+<div data-on-archive="true" style="position:fixed;left:0;right:0;bottom:0;z-index:110;padding:clamp(10px,2vh,24px) var(--gutter-page) clamp(12px,2.4vh,32px);background:linear-gradient(to top,rgba(10,10,10,.86),rgba(10,10,10,0));display:flex;align-items:center;gap:var(--space-6)">
+  <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-left" label="{{ L.prevDecade }}" on-archive="{{ true }}" on-click="{{ prevDecade }}" hint-size="30px,30px"></x-import>
+  <div style="flex:1;display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-2);border-bottom:1px solid var(--line-on-archive);padding-bottom:var(--space-3)">
+    <sc-for list="{{ ticks }}" as="tick" hint-placeholder-count="11">
+      <button onClick="{{ tick.go }}" style="{{ tick.style }}">{{ tick.year }}</button>
+    </sc-for>
+  </div>
+  <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-right" label="{{ L.nextDecade }}" on-archive="{{ true }}" on-click="{{ nextDecade }}" hint-size="30px,30px"></x-import>
+  
+</div>
+
+<sc-if value="{{ artistOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:200;background:var(--surface-page);overflow-y:auto;animation:nkFade 420ms cubic-bezier(.22,.61,.36,1)">
+    <div style="position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;height:var(--rail-header);padding:0 var(--gutter-page);background:var(--surface-page);border-bottom:1px solid var(--line-hairline)">
+      <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ artist.fileLine }}</span>
+      <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="x" label="{{ L.close }}" on-click="{{ closeArtist }}" hint-size="30px,30px"></x-import>
+    </div>
+
+    <div style="padding:var(--space-9) var(--gutter-page) var(--space-10);display:flex;flex-direction:column;gap:var(--space-10)">
+      <div style="display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);gap:var(--space-8);align-items:start">
+        <img src="{{ artist.portrait }}" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;filter:var(--filter-archive);background:var(--surface-archive)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          <div>
+            <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint);margin-bottom:var(--space-4)">{{ artist.discipline }}</div>
+            <h2 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--type-display-2);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-display)">{{ artist.name }}</h2>
+            <div style="margin-top:var(--space-4);font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);color:var(--text-muted)">{{ artist.years }}</div>
+          </div>
+          <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" lead="{{ true }}" hint-size="100%,60px">{{ artist.lead }}</x-import>
+          <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,120px">{{ artist.bio }}</x-import>
+          <div data-facts-plain="true"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.FactList" items="{{ artist.facts }}" columns="{{ 3 }}" hint-size="100%,90px"></x-import></div>
+        </div>
+      </div>
+
+      <sc-if value="{{ artist.hasDetail }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--space-9)">
+          <div style="display:flex;flex-direction:column;gap:var(--space-8)">
+            <sc-if value="{{ artist.hasStyle }}" hint-placeholder-val="{{ false }}">
+              <div>
+                <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SectionHeading" eyebrow="{{ L.styleInfluence }}" level="{{ 3 }}" style="margin-bottom:var(--space-6)" hint-size="100%,90px">{{ L.theHand }}</x-import>
+                <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,140px">{{ artist.style }}</x-import>
+              </div>
+            </sc-if>
+            <sc-if value="{{ artist.hasQuote }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.PullQuote" attribution="{{ artist.quoteBy }}" source="{{ artist.quoteSource }}" hint-size="100%,120px">{{ artist.quote }}</x-import>
+            </sc-if>
+            <sc-if value="{{ artist.hasContext }}" hint-placeholder-val="{{ false }}">
+              <div>
+                <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SectionHeading" eyebrow="{{ L.context }}" level="{{ 3 }}" style="margin-bottom:var(--space-6)" hint-size="100%,90px">{{ L.aroundEasel }}</x-import>
+                <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,120px">{{ artist.context }}</x-import>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <div>
+        <sc-if value="{{ artist.hasChronicle }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-bottom:var(--space-10)">
+            <div id="nk-chronicle-head" style="margin-bottom:var(--space-8)"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SectionHeading" eyebrow="{{ L.byYear }}" level="{{ 3 }}" hint-size="100%,90px">{{ L.chronicle }}</x-import></div>
+            <div id="nk-chronicle" style="position:relative;display:flex;flex-direction:column">
+              <div style="position:absolute;left:7px;top:0;bottom:0;width:1px;background:var(--line-hairline)"></div>
+              <div id="nk-chronicle-fill" style="position:absolute;left:7px;top:0;width:1px;height:0;background:var(--pigment-ochre);transition:height 180ms cubic-bezier(.22,.61,.36,1)"></div>
+              <sc-for list="{{ artist.chronicle }}" as="row" hint-placeholder-count="4">
+                <div data-chron-row="true" style="position:relative;display:grid;grid-template-columns:minmax(240px,340px) minmax(0,1fr);gap:var(--space-8);align-items:start;padding:var(--space-9) 0 var(--space-9) var(--space-8);border-top:1px solid var(--line-hairline);opacity:.28;transform:translateY(14px);transition:opacity 620ms cubic-bezier(.22,.61,.36,1), transform 620ms cubic-bezier(.22,.61,.36,1)">
+                  <span data-chron-dot="true" style="position:absolute;left:2px;top:calc(var(--space-9) + 15px);width:11px;height:11px;border-radius:50%;background:var(--paper-1);border:1px solid var(--line-strong);transition:background 420ms cubic-bezier(.22,.61,.36,1)"></span>
+                  <div style="position:sticky;top:calc(var(--rail-header) + var(--space-7));font-family:var(--font-display);font-size:var(--type-display-3);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-display)">{{ row.year }}<sc-if value="{{ row.hasMood }}" hint-placeholder-val="{{ true }}"><span style="display:block;margin-top:var(--space-4);font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);line-height:1.4;letter-spacing:0;color:var(--text-muted);max-width:34ch;text-wrap:pretty">{{ row.mood }}</span></sc-if></div>
+                  <div style="display:flex;flex-direction:column;gap:var(--space-6);min-width:0">
+                    <sc-if value="{{ row.hasNote }}" hint-placeholder-val="{{ true }}">
+                      <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,60px">{{ row.note }}</x-import>
+                    </sc-if>
+                    <sc-if value="{{ row.empty }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);color:var(--text-faint)">{{ L.noEntry }}</span>
+                    </sc-if>
+                    <sc-if value="{{ row.hasWorks }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;flex-wrap:wrap;gap:var(--space-6)">
+                        <sc-for list="{{ row.works }}" as="work" hint-placeholder-count="2">
+                          <button onClick="{{ work.open }}" style="{{ chronicleWorkStyle }}">
+                            <img src="{{ work.src }}" alt="" style="display:block;height:192px;width:auto;max-width:400px;object-fit:contain;background:var(--paper-2)">
+                            <span style="font-family:var(--font-editorial);font-style:italic;font-size:var(--type-caption);line-height:1.25;color:var(--text-muted);max-width:400px;text-align:left">{{ work.title }}</span>
+                          </button>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-5);margin-bottom:var(--space-8)">
+          <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SectionHeading" eyebrow="{{ L.catalogue }}" level="{{ 3 }}" hint-size="auto,90px">{{ L.worksInArchive }}</x-import>
+          <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint);white-space:nowrap">{{ artist.catalogueCount }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-8) var(--space-7);align-items:start">
+          <sc-for list="{{ artist.works }}" as="work" hint-placeholder-count="3">
+            <button onClick="{{ work.open }}" style="{{ plateMountStyle }}">
+              <img src="{{ work.src }}" alt="" style="width:100%;height:auto;display:block;background:var(--paper-2)">
+              <span style="display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-5) var(--space-2) var(--space-1);text-align:left">
+                <span style="font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);line-height:1.2;color:var(--text-display)">{{ work.title }}</span>
+                <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ work.line }}</span>
+              </span>
+            </button>
+          </sc-for>
+          <sc-for list="{{ artist.slots }}" as="slot" hint-placeholder-count="3">
+            <div style="{{ plateSlotStyle }}">
+              <span style="width:100%;aspect-ratio:4/5;border:1px solid var(--line-hairline);background:var(--paper-2);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:11px;letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint);text-align:center">{{ L.awaitingPlate }}</span>
+              <span style="display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-5) var(--space-2) var(--space-1)">
+                <span style="font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);line-height:1.2;color:var(--text-muted)">{{ L.notCatalogued }}</span>
+                <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.plateAwaited }}</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ indexOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:210;animation:nkFade 420ms cubic-bezier(.22,.61,.36,1)">
+    <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IndexOverlay" open="{{ true }}" sections="{{ indexSections }}" on-select="{{ indexSelect }}" on-close="{{ closeIndex }}" style="position:fixed" hint-size="100%,100%"></x-import>
+  </div>
+</sc-if>
+
+<sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:220;background:var(--surface-page);overflow-y:auto;animation:nkFade 420ms cubic-bezier(.22,.61,.36,1)">
+    <div style="position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:var(--space-5);height:var(--rail-header);padding:0 var(--gutter-page);background:var(--surface-page);border-bottom:1px solid var(--line-hairline)">
+      <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ lightboxWork.fileLine }}</span>
+      <div style="display:flex;align-items:center;gap:var(--space-4)">
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-left" label="{{ L.prevWork }}" on-click="{{ prevWork }}" hint-size="30px,30px"></x-import>
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-right" label="{{ L.nextWork }}" on-click="{{ nextWork }}" hint-size="30px,30px"></x-import>
+        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="x" label="{{ L.close }}" on-click="{{ closeLightbox }}" hint-size="30px,30px"></x-import>
+      </div>
+    </div>
+
+    <div style="padding:var(--space-9) var(--gutter-page) var(--space-10);display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+      <div style="display:inline-flex;flex-direction:column;padding:16px;background:var(--paper-0);border:1px solid var(--line-hairline);box-shadow:0 1px 2px rgba(20,18,15,.06), 0 12px 32px rgba(20,18,15,.10);max-width:100%">
+        <img src="{{ lightboxWork.src }}" alt="" style="display:block;max-width:100%;max-height:64vh;width:auto;height:auto;object-fit:contain">
+      </div>
+
+      <div style="width:100%;max-width:960px;display:flex;flex-direction:column;gap:var(--space-8)">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);border-bottom:1px solid var(--line-hairline);padding-bottom:var(--space-7)">
+          <h2 style="margin:0;font-family:var(--font-editorial);font-style:italic;font-weight:400;font-size:var(--type-display-3);line-height:1.15;color:var(--text-display)">{{ lightboxWork.title }}</h2>
+          <div style="font-family:var(--font-display);font-size:var(--type-title);line-height:1;color:var(--text-display)">{{ lightboxWork.artist }}</div>
+          <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ lightboxWork.line }}</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-8) var(--space-9);align-items:start">
+          <sc-if value="{{ lightboxWork.hasSubject }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+              <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.subject }}</div>
+              <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,100px">{{ lightboxWork.subject }}</x-import>
+            </div>
+          </sc-if>
+          <sc-if value="{{ lightboxWork.hasMaking }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+              <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.making }}</div>
+              <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,100px">{{ lightboxWork.making }}</x-import>
+            </div>
+          </sc-if>
+          <sc-if value="{{ lightboxWork.hasHolding }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+              <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.holding }}</div>
+              <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,80px">{{ lightboxWork.holding }}</x-import>
+            </div>
+          </sc-if>
+          <sc-if value="{{ lightboxWork.noNotes }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);color:var(--text-muted)">{{ L.noDescription }}</div>
+          </sc-if>
+        </div>
+
+        <button onClick="{{ openArtistFromWork }}" style="{{ workArtistLinkStyle }}">{{ lightboxWork.artistLink }}</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const ARTISTS = [
+  {
+    id: 'khludov', name: 'Nikolai Khludov', years: '1850 — 1935', discipline: 'Painting, graphic art, teaching',
+    portrait: 'assets/portrait-khludov.png', fileLine: 'Archive file · Khludov',
+    lead: 'The painter who brought easel painting to Verny, and taught the first Kazakh painters to use it.',
+    bio: 'Khludov came to Verny in 1877 and stayed for the rest of his life, working as a draughtsman and surveyor and travelling with geological and botanical expeditions. He painted the life of the Ili and Semirechye region for half a century and founded the first art school in Kazakhstan; the largest part of his surviving work is held in the Central State Museum of Kazakhstan.',
+    facts: [ { label: 'In Verny from', value: '1877' }, { label: 'Died', value: '1935', note: 'Alma-Ata' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'kalmykov', name: 'Sergei Kalmykov', years: '1891 — 1967', discipline: 'Painting, stage design',
+    portrait: 'assets/portrait-kalmykov.png', fileLine: 'Archive file · Kalmykov',
+    lead: 'The one Silver Age modernist who lived out his life in Alma-Ata, painting nothing anyone had asked for.',
+    bio: 'Kalmykov moved to Alma-Ata in 1935 at the invitation of the new musical theatre and designed its productions until he retired in 1962. Alongside the stage work he painted continuously in a private, high-colour idiom with no relation to socialist realism; the first exhibition of that work was held only after his death.',
+    facts: [ { label: 'In Alma-Ata from', value: '1935' }, { label: 'Theatre', value: 'Abai Opera' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'cherkassky', name: 'Abram Cherkassky', years: '1886 — 1967', discipline: 'Oil, teaching',
+    portrait: 'assets/portrait-cherkassky.png', fileLine: 'Archive file · Cherkassky',
+    lead: 'A Kyiv-trained painter who spent his second life teaching in Alma-Ata.',
+    bio: 'Cherkassky arrived in Alma-Ata before the war and taught at the art college there, where Gulfairus Ismailova was among his students. He went on painting until his death in 1967.',
+    facts: [ { label: 'Born', value: '1886' }, { label: 'Taught', value: 'Alma-Ata' }, { label: 'In archive', value: 'No plate' } ]
+  },
+  {
+    id: 'ismailov', name: 'Aubakir Ismailov', years: '1913 — 1999', discipline: 'Oil',
+    portrait: 'assets/portrait-ismailov.png', fileLine: 'Archive file · Ismailov',
+    lead: 'One of the first generation of Kazakh easel painters after Kasteyev.',
+    bio: 'Ismailov worked through six decades of Kazakh painting, from the war years to independence. Canvases of his from the 1960s remain in private collections in Almaty.',
+    facts: [ { label: 'Born', value: '1913' }, { label: 'Died', value: '1999' }, { label: 'In archive', value: '6 plates' } ]
+  },
+  {
+    id: 'galimbayeva', name: 'Aisha Galimbayeva', years: '1917 — 2008', discipline: 'Painting, film design',
+    portrait: 'assets/portrait-galimbayeva.png', fileLine: 'Archive file · Galimbayeva',
+    lead: 'The first Kazakh woman to work as a professional painter and film designer.',
+    bio: 'Galimbayeva graduated from the state film institute in Moscow in 1949 and worked both in cinema and at the easel. People\u2019s Artist of Kazakhstan and a laureate of the republic\u2019s Valikhanov prize.',
+    facts: [ { label: 'Born', value: '1917', note: 'Issyk' }, { label: 'Trained', value: 'Moscow' }, { label: 'In archive', value: 'No plate' } ]
+  },
+  {
+    id: 'kenbayev', name: 'Moldakhmet Kenbayev', years: '1925 — 1993', discipline: 'Oil',
+    portrait: 'assets/portrait-kenbayev.png', fileLine: 'Archive file · Kenbayev',
+    lead: 'A painter who took the steppe as his single subject and never left it.',
+    bio: 'Kenbayev graduated from the Surikov Institute in Moscow and returned to paint herders, horses and the foothills. Catching a Horse entered the collection of the Tretyakov Gallery.',
+    quote: 'I dreamt of the steppe. I wanted everyone to love it the way I loved it.',
+    quoteBy: 'Attributed', quoteSource: 'Undated',
+    facts: [ { label: 'Born', value: '1925' }, { label: 'Trained', value: 'Moscow' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'telzhanov', name: 'Kanafiya Telzhanov', years: '1927 — 2013', discipline: 'Oil',
+    portrait: 'assets/portrait-telzhanov.png', fileLine: 'Archive file · Telzhanov',
+    lead: 'The painter of the ceremonial Kazakh canvas at its most confident.',
+    bio: 'Telzhanov belonged to the group sent from Alma-Ata to the Moscow and Leningrad academies and came back to paint large figure compositions. On the Land of the Forefathers entered the Tretyakov collection.',
+    facts: [ { label: 'Born', value: '1927' }, { label: 'Trained', value: 'Leningrad' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'shardenov', name: 'Zhanatai Shardenov', years: '1927 — 1992', discipline: 'Oil, landscape',
+    portrait: 'assets/portrait-shardenov.png', fileLine: 'Archive file · Shardenov',
+    lead: 'A landscape painter who stayed outside the official line and painted the Alatau instead.',
+    bio: 'Shardenov studied two years at the Repin Institute in Leningrad and joined the Union of Artists in 1961. His paint is laid on as relief \u2014 the brushmark itself carries the picture \u2014 in mountain and orchard subjects around Alma-Ata.',
+    facts: [ { label: 'Born', value: '1927' }, { label: 'Died', value: '1992' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'mambeyev', name: 'Sabyr Mambeyev', years: '1928 — 2018', discipline: 'Oil, decorative panel',
+    portrait: 'assets/portrait-2.png', fileLine: 'Archive file · Mambeyev',
+    lead: 'The painter who turned the yurt interior into a modern composition.',
+    bio: 'Mambeyev trained in Leningrad and returned to Alma-Ata at the end of the 1950s with a flattened, decorative language that broke with academic modelling. His canvases hold their colour in large calm fields, ornament read as structure rather than decoration.',
+    style: 'Flat planes, a warm ochre and indigo register, silhouettes that sit parallel to the picture surface. Mambeyev keeps depth shallow on purpose, so that a felt pattern, a mountain and a figure can carry the same weight in the same rectangle.',
+    context: 'The Thaw let painters in the republic look at Central Asian ornament, at Matisse, and at their own grandparents\u2019 objects in the same breath.',
+    quote: 'I painted the mountain the way it looked from the tram.',
+    quoteBy: 'Attributed', quoteSource: 'Undated',
+    facts: [ { label: 'Born', value: '1928' }, { label: 'Trained', value: 'Leningrad' }, { label: 'In archive', value: '1 plate' } ],
+    timeline: [
+      { year: '1928', text: 'Born in the Almaty region.' },
+      { year: '1957', text: 'Paints My Yurt, the work that fixes his reputation.', emphasis: true },
+      { year: '2018', text: 'Dies in Almaty.' }
+    ]
+  },
+  {
+    id: 'shayakhmetov', name: 'Kamil Shayakhmetov', years: 'Born 1928', discipline: 'Oil',
+    portrait: 'assets/portrait-shayakhmetov.png', fileLine: 'Archive file · Shayakhmetov',
+    lead: 'One of the students sent out of Alma-Ata to be trained as a national painter.',
+    bio: 'Born in Kokchetav, Shayakhmetov studied first at the Gogol art college in Alma-Ata and then, like Galimbayeva, Kenbayev, Telzhanov and Mambeyev, was sent on to the academies of Moscow and Leningrad. Member of the Union of Artists of the USSR.',
+    facts: [ { label: 'Born', value: '1928', note: 'Kokchetav' }, { label: 'Trained', value: 'Alma-Ata' }, { label: 'In archive', value: 'No plate' } ]
+  },
+  {
+    id: 'ismailova', name: 'Gulfairus Ismailova', years: '1929 — 2013', discipline: 'Painting, stage design',
+    portrait: 'assets/portrait-3.png', fileLine: 'Archive file · Ismailova',
+    lead: 'Painter and stage designer, and the archive\u2019s great portraitist of performers.',
+    bio: 'Ismailova finished the Alma-Ata art college in the studio of Abram Cherkassky, then the Repin Institute in Leningrad in 1956. From 1971 she was principal designer of the Abai Opera and Ballet Theatre, where she designed dozens of productions, and she was also the production designer of the film Kyz Zhibek.',
+    style: 'Deep madder and gold, heavy fabric rendered with real appetite, a figure held still and centred. Costume in her work is never a costume; it is the argument of the picture.',
+    context: 'Theatre and painting shared a payroll and a building in Alma-Ata for decades. Reading her canvases without the opera house behind them loses half the meaning.',
+    facts: [ { label: 'Born', value: '1929', note: 'Alma-Ata' }, { label: 'Theatre', value: 'Abai Opera' }, { label: 'In archive', value: '1 plate' } ],
+    timeline: [
+      { year: '1929', text: 'Born in Alma-Ata.' },
+      { year: '1956', text: 'Graduates from the Repin Institute, Leningrad.' },
+      { year: '1962', text: 'Paints Kulyash Baiseitova as Kyz-Zhibek.', emphasis: true },
+      { year: '1971', text: 'Becomes principal designer of the Abai Opera and Ballet Theatre.' },
+      { year: '2013', text: 'Dies in Almaty.' }
+    ]
+  },
+  {
+    id: 'sariyev', name: 'Shaimardan Sariyev', years: '1937 — 1988', discipline: 'Oil, drawing',
+    portrait: 'assets/portrait-sariyev.png', fileLine: 'Archive file · Sariyev',
+    lead: 'One of the three painters usually named as the Kazakh sixties generation.',
+    bio: 'Sariyev showed with Aitbayev and Togusbayev in the years when Kazakh painting turned towards symbol and flat colour. The Shepherd, painted in 1969, is the work most often reproduced.',
+    facts: [ { label: 'Born', value: '1937' }, { label: 'Died', value: '1988' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'togusbayev', name: 'Tokbolat Togusbayev', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-togusbayev.png', fileLine: 'Archive file · Togusbayev',
+    lead: 'The domestic interior, painted with the seriousness usually reserved for history.',
+    bio: 'Togusbayev is named with Aitbayev and Sariyev as one of the Kazakh sixties painters. Kitchen, 1972, oil on canvas, is his best known work.',
+    facts: [ { label: 'Generation', value: 'The sixties' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'sydykhanov', name: 'Abdrashit Sydykhanov', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-sydykhanov.png', fileLine: 'Archive file · Sydykhanov',
+    lead: 'A painter of labour scenes rebuilt as pattern.',
+    bio: 'Sydykhanov is shown among the masters of the sixties and seventies in the collection of the Kasteyev museum. Gathering Tobacco dates from 1972.',
+    facts: [ { label: 'Generation', value: 'The sixties' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'aitbayev', name: 'Salikhitdin Aitbayev', years: '1938 — 1994', discipline: 'Oil',
+    portrait: 'assets/portrait-4.png', fileLine: 'Archive file · Aitbayev',
+    lead: 'The sharpest voice of the generation that arrived after the Thaw.',
+    bio: 'Aitbayev made his name at twenty-eight with a single canvas, Happiness, painted in 1966. His figures are monumental and frontal, the palette reduced to earth and sky, and the mood formal rather than warm.',
+    style: 'Large simplified volumes, a horizon set very high or removed altogether, colour laid down in broad dry strokes. Aitbayev takes Mambeyev\u2019s flatness and makes it severe.',
+    context: 'By the late 1960s a painter in Alma-Ata could exhibit a national subject in a modern idiom without apology. That freedom was narrow, and it did not last evenly.',
+    facts: [ { label: 'Born', value: '1938' }, { label: 'Breakthrough', value: '1966' }, { label: 'In archive', value: '1 plate' } ],
+    timeline: [
+      { year: '1938', text: 'Born in the Kyzylorda region.' },
+      { year: '1966', text: 'Paints Happiness.', emphasis: true },
+      { year: '1994', text: 'Dies in Almaty.' }
+    ]
+  },
+  {
+    id: 'dzhusupov', name: 'Ali Dzhusupov', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-dzhusupov.png', fileLine: 'Archive file · Dzhusupov',
+    lead: 'Women of My Homeland, 1967 \u2014 one canvas that fixed a decade.',
+    bio: 'Dzhusupov is held in the collection of the Kasteyev museum among the painters of the 1960s. Little else about him is recorded in open sources.',
+    facts: [ { label: 'Known work', value: '1967' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'nurzhumayev', name: 'Oralbek Nurzhumayev', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-none.png', fileLine: 'Archive file · Nurzhumayev',
+    lead: 'Melody, 1972 \u2014 painting as music, in the manner of that decade.',
+    bio: 'Nurzhumayev appears in the collection of the Kasteyev museum among the painters of the 1970s. Little else about him is recorded in open sources.',
+    facts: [ { label: 'Known work', value: '1972' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'kasteyev', name: 'Abylkhan Kasteyev', years: '1904 — 1973', discipline: 'Watercolour, oil',
+    portrait: 'assets/portrait-1.png', fileLine: 'Archive file · Kasteyev',
+    lead: 'The first professional painter of Kazakhstan, and the reason a national school of painting exists at all.',
+    bio: 'Born near Zharkent in the Zhetysu foothills, Kasteyev began as a labourer on the Turksib railway and came to painting through the studio of Nikolai Khludov, then three years at the Krupskaya art studio in Moscow. He left more than a thousand works; People\u2019s Artist of the Kazakh SSR in 1944, and chairman of the republic\u2019s Union of Artists from 1945 to 1956. The State Museum of Arts in Almaty carries his name.',
+    style: 'Kasteyev works in thin, luminous washes: a high horizon, figures kept small, the whole scene lit evenly as if remembered rather than observed. Landscape is never a backdrop for him \u2014 it is the subject, and people enter it as visitors.',
+    context: 'The 1930s brought the first art schools, the first exhibitions and the first commissions to the republic. A painter of Kasteyev\u2019s generation had no local tradition of easel painting to argue with, and built one in a single working life.',
+    facts: [ { label: 'Born', value: '1904', note: 'Zhetysu' }, { label: 'Medium', value: 'Watercolour' }, { label: 'In archive', value: '2 plates' } ],
+    timeline: [
+      { year: '1904', text: 'Born near Zharkent, in a family of herders.' },
+      { year: '1929', text: 'Enters the studio of Nikolai Khludov in Alma-Ata.', emphasis: true },
+      { year: '1932', text: 'Paints Turksib, following the new railway across the steppe.' },
+      { year: '1944', text: 'Named People\u2019s Artist of the Kazakh SSR.' },
+      { year: '1945', text: 'Chairs the Union of Artists of Kazakhstan until 1956.' },
+      { year: '1973', text: 'Dies in Alma-Ata. The State Museum of Arts is later named after him.' }
+    ]
+  },
+  {
+    id: 'mullashev', name: 'Kamil Mullashev', years: 'Born 1944', discipline: 'Oil',
+    portrait: 'assets/portrait-mullashev.png', fileLine: 'Archive file · Mullashev',
+    lead: 'The triptych that showed the republic three ways at once.',
+    bio: 'Mullashev began his training at the Xinjiang institute of arts and returned with his family to Kazakhstan in 1963. His triptych Land and Time. Kazakhstan, 1978, presents the country as virgin-lands, space-age and industrial in one work.',
+    facts: [ { label: 'Trained', value: 'Xinjiang' }, { label: 'Key work', value: '1978' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'amanzholov', name: 'Magauya Amanzholov', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-amanzholov.png', fileLine: 'Archive file · Amanzholov',
+    lead: 'One of the painters of the epic canvas of the 1980s.',
+    bio: 'Amanzholov is named with Akanayev and Mullashev among the painters who made large picture-epics in the 1970s and 1980s. Spring at the Arin Winter Camp dates from 1980.',
+    facts: [ { label: 'Known work', value: '1980' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'tyulkiyev', name: 'Bekseit Tyulkiyev', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-tyulkiyev.png', fileLine: 'Archive file · Tyulkiyev',
+    lead: 'The Artist\u2019s Dream, 1983 \u2014 the studio turned inward.',
+    bio: 'Tyulkiyev is held in the collection of the Kasteyev museum among the painters of the 1980s. Little else about him is recorded in open sources.',
+    facts: [ { label: 'Known work', value: '1983' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'akanayev', name: 'Amandos Akanayev', years: 'Born 1948', discipline: 'Oil, mixed media',
+    portrait: 'assets/portrait-akanayev.png', fileLine: 'Archive file · Akanayev',
+    lead: 'The painter who made the sacred signs of the nomadic world current again.',
+    bio: 'Akanayev belongs to the generation that reworked the symbols of the nomadic civilisation into contemporary painting. Canvases of his from 1990 and 1993 are held in private collections in Almaty.',
+    facts: [ { label: 'Born', value: '1948' }, { label: 'In archive', value: 'No plate' } ]
+  },
+  {
+    id: 'bapishev', name: 'Bakhyt Bapishev', years: 'Dates not in the archive', discipline: 'Oil',
+    portrait: 'assets/portrait-none.png', fileLine: 'Archive file · Bapishev',
+    lead: 'Monument U, 1990 \u2014 painted on the edge of the union coming apart.',
+    bio: 'Bapishev is shown among the Kazakh painters of the late Soviet years in the collection of the Kasteyev museum. Little else about him is recorded in open sources.',
+    facts: [ { label: 'Known work', value: '1990' }, { label: 'In archive', value: '1 plate' } ]
+  },
+  {
+    id: 'tolepbay', name: 'Yerbolat Tolepbay', years: 'Born 1955', discipline: 'Oil',
+    portrait: 'assets/portrait-tolepbay.png', fileLine: 'Archive file · Tolepbay',
+    lead: 'The painter who argued that Kazakh painting could be philosophy.',
+    bio: 'Tolepbay is named as the artist who established the philosophical register of Kazakh painting in the 1970s and 1980s, and has gone on working through independence. His portrait of the writer Chinghiz Aitmatov is among his best-known canvases.',
+    facts: [ { label: 'Born', value: '1955' }, { label: 'In archive', value: '1 plate' } ]
+  }
+];
+
+const WORKS = [
+  { id: 'w-kh1', title: 'The Messenger', year: '1916', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/plate-1.png', decade: 1910 },
+  { id: 'w-ka1', title: 'Turksib', year: '1932', artistId: 'kasteyev', medium: 'Watercolour on paper', src: 'assets/work-turksib.png', decade: 1930 },
+  { id: 'w-kl1', title: 'Fantastic Landscape (with red rocks)', year: 'Undated', artistId: 'kalmykov', medium: 'Medium not recorded', src: 'assets/work-kalmykov.png', decade: 1940 },
+  { id: 'w-ma1', title: 'My Yurt', year: '1957', artistId: 'mambeyev', medium: 'Oil on canvas', src: 'assets/work-yurt.png', decade: 1950 },
+  { id: 'w-ke1', title: 'Catching a Horse', year: '1957', artistId: 'kenbayev', medium: 'Oil on canvas', src: 'assets/work-horse.png', decade: 1950 },
+  { id: 'w-te1', title: 'On the Land of the Forefathers', year: '1958', artistId: 'telzhanov', medium: 'Oil on canvas', src: 'assets/plate-6.png', decade: 1950 },
+  { id: 'w-is1', title: 'Kulyash Baiseitova as Kyz-Zhibek', year: '1962', artistId: 'ismailova', medium: 'Oil on canvas', src: 'assets/work-kyzzhibek.png', decade: 1960 },
+  { id: 'w-ai1', title: 'Happiness', year: '1966', artistId: 'aitbayev', medium: 'Oil on canvas', src: 'assets/work-happiness.png', decade: 1960 },
+  { id: 'w-dz1', title: 'Women of My Homeland', year: '1967', artistId: 'dzhusupov', medium: 'Oil on canvas', src: 'assets/work-women.png', decade: 1960 },
+  { id: 'w-ka2', title: 'Medeo', year: '1967', artistId: 'kasteyev', medium: 'Watercolour on paper', src: 'assets/work-medeo.png', decade: 1960 },
+  { id: 'w-sa1', title: 'The Shepherd', year: '1969', artistId: 'sariyev', medium: 'Oil on canvas', src: 'assets/plate-5.png', decade: 1960 },
+  { id: 'w-sh1', title: 'Autumn in the Mountains', year: 'Undated', artistId: 'shardenov', medium: 'Oil on canvas', src: 'assets/plate-6.png', decade: 1970 },
+  { id: 'w-sy1', title: 'Gathering Tobacco', year: '1972', artistId: 'sydykhanov', medium: 'Oil on canvas', src: 'assets/plate-1.png', decade: 1970 },
+  { id: 'w-to1', title: 'Kitchen', year: '1972', artistId: 'togusbayev', medium: 'Oil on canvas', src: 'assets/plate-2.png', decade: 1970 },
+  { id: 'w-nu1', title: 'Melody', year: '1972', artistId: 'nurzhumayev', medium: 'Oil on canvas', src: 'assets/plate-3.png', decade: 1970 },
+  { id: 'w-mu1', title: 'Land and Time. Kazakhstan', year: '1978', artistId: 'mullashev', medium: 'Oil on canvas, triptych', src: 'assets/work-land.png', decade: 1970 },
+  { id: 'w-am1', title: 'Spring at the Arin Winter Camp', year: '1980', artistId: 'amanzholov', medium: 'Oil on canvas', src: 'assets/work-arin.png', decade: 1980 },
+  { id: 'w-ty1', title: 'The Artist\u2019s Dream', year: '1983', artistId: 'tyulkiyev', medium: 'Oil on canvas', src: 'assets/plate-6.png', decade: 1980 },
+  { id: 'w-tl1', title: 'Portrait of the writer Chinghiz Aitmatov', year: 'Undated', artistId: 'tolepbay', medium: 'Oil on canvas', src: 'assets/plate-1.png', decade: 1980 },
+  { id: 'w-ai-may', title: 'May Day', year: '1960', artistId: 'ismailov', medium: 'Oil on canvas, 177.5 × 177.5 cm', src: 'assets/work-ai-mayday.png', decade: 1960 },
+  { id: 'w-ai-har', title: 'At the Harvest', year: '1967', artistId: 'ismailov', medium: 'Watercolour on paper, 40 × 58.5 cm', src: 'assets/work-ai-harvest.png', decade: 1960 },
+  { id: 'w-ai-zha', title: 'Zhailau', year: 'Undated', artistId: 'ismailov', medium: 'Oil on canvas', src: 'assets/work-ai-zhailyau.png', decade: 1950 },
+  { id: 'w-ai-gor', title: 'Gorge with a herd', year: 'Undated', artistId: 'ismailov', medium: 'Oil on canvas', src: 'assets/work-ai-gorge.png', decade: 1950 },
+  { id: 'w-ai-ala', title: 'Alatau state farm, Talgar district', year: 'Undated', artistId: 'ismailov', medium: 'Oil on board, 16 × 11 cm', src: 'assets/work-ai-alatau.png', decade: 1950 },
+  { id: 'w-ai-mou', title: 'Mountains', year: '1990', artistId: 'ismailov', medium: 'Oil on canvas, 20 × 31 cm', src: 'assets/work-ai-mountains.png', decade: 1990 },
+  { id: 'w-ba1', title: 'Monument U', year: '1990', artistId: 'bapishev', medium: 'Oil on canvas', src: 'assets/plate-2.png', decade: 1990 }
+];
+
+const WORK_NOTES = {
+  'w-ka1': {
+    subject: 'The building of the Turkestan\u2013Siberian railway, painted while the line was still new. The train is small against the steppe; the subject is the country the track crosses rather than the engineering.',
+    making: 'Kasteyev worked in transparent watercolour, on the road, in the years when the republic had no easel-painting tradition of its own to follow.'
+  },
+  'w-ka2': {
+    subject: 'The high-mountain gorge above Alma-Ata, a Sunday destination for the whole city long before the skating rink made it famous abroad.',
+    making: 'A late watercolour, painted from the slope rather than from a photograph, with the horizon kept high and the figures small.'
+  },
+  'w-ma1': {
+    subject: 'The inside of a yurt read as a flat pattern: felt, ornament and figure sit parallel to the picture surface, all carrying the same weight.',
+    making: 'Painted after Mambeyev returned from Leningrad, and usually named as the work that opened the decorative \u201cnational style\u201d of the 1960s.'
+  },
+  'w-is1': {
+    subject: 'Kulyash Baiseitova in the title role of the opera Kyz-Zhibek \u2014 a portrait of a performer in costume, frontal and ceremonial.',
+    making: 'Ismailova painted it while working inside the theatre itself; the costume is rendered with the appetite of a stage designer, not an observer.'
+  },
+  'w-ai1': {
+    subject: 'A young family, monumental and frontal, the palette reduced to earth and sky.',
+    making: 'Aitbayev was twenty-eight. The canvas was shown in Moscow the following year and made his name in a single season.'
+  },
+  'w-dz1': {
+    subject: 'Women of the artist\u2019s home region, held still in a shallow, decorative space.',
+    making: 'Painted at the end of the Thaw years, when a national subject could be shown in a modern idiom without apology.'
+  },
+  'w-mu1': {
+    subject: 'A triptych on the land itself \u2014 the steppe, its people and the time passing over both.',
+    making: 'One of the large programme canvases of the late 1970s, painted for public exhibition rather than for a room.'
+  },
+  'w-kh1': {
+    subject: 'A rider carrying news across the Semirechye country, painted from life observed on expedition routes.',
+    making: 'Khludov worked as a draughtsman on geological and botanical expeditions; his subjects come from those journeys.'
+  },
+  'w-kl1': {
+    subject: 'An invented landscape in high, unreal colour, belonging to no commission and no programme.',
+    making: 'Kalmykov painted continuously outside his theatre work; this side of his output was first exhibited only after his death.'
+  },
+  'w-ai-may': {
+    subject: 'The First of May above Alma-Ata: the crowd on the slope, balloons, red flags and construction cranes, with the Trans-Ili Alatau filling the top half of the square canvas.',
+    making: 'A large square canvas of 1960 \u2014 the city itself, still being built, is the real subject under the holiday.'
+  },
+  'w-ai-har': {
+    subject: 'A farm worker at the harvest, painted at close range, with the field and the shed behind him.',
+    making: 'Watercolour on paper, 1967 \u2014 the sheet worked quickly and left transparent.'
+  },
+  'w-ai-zha': {
+    subject: 'A flock moving up to the summer pasture through a red gorge, with the herders resting at the near edge.',
+    making: 'Undated. The mountain summer camp is a recurring subject across Ismailov\u2019s landscapes.'
+  },
+  'w-ai-gor': {
+    subject: 'A narrow gorge seen from above, the snow peak behind it and a camp with a herd on the valley floor.',
+    making: 'Undated. A vertical format, unusual for a landscape of this period.'
+  },
+  'w-ai-ala': {
+    subject: 'The Alatau state farm in the Talgar district \u2014 a small study made on the spot.',
+    making: 'Oil on board, 16 \u00d7 11 cm. A working sketch rather than an exhibition piece.'
+  },
+  'w-ai-mou': {
+    subject: 'The foothills in spring, the ridge lilac under snow, a single tree in the near ground.',
+    making: 'Oil on canvas, 20 \u00d7 31 cm, 1990 \u2014 painted at the very end of the artist\u2019s working life.'
+  }
+};
+
+const DECADE_MOOD = {
+  1850: 'Verny is a garrison of clay walls and irrigation ditches; painting here means a surveyor\u2019s sketchbook, not a studio.',
+  1860: 'The fortress becomes a town. Its first draughtsmen arrive with expeditions rather than with commissions.',
+  1870: 'Settlers, orchards and the first brick streets. The Semirechye country is being drawn before it is painted.',
+  1880: 'An earthquake and a rebuilt town. Wooden architecture and apple orchards set the look of the place for the next century.',
+  1890: 'Photography and lithography reach the town. Easel painting is still an imported habit of one or two men.',
+  1900: 'The last decade of Verny. A generation is born that will live through everything that follows.',
+  1910: 'War, then revolution. The country changes its name and its owners; nobody is commissioning pictures.',
+  1920: 'Famine, then a fragile recovery. Evening studios open and take in students who have never seen an oil painting.',
+  1930: 'The railway, the dam and the collective farm arrive as subjects at the same moment as the profession itself. Optimism is compulsory, and some of it is real.',
+  1940: 'War empties the studios and fills the town with evacuees \u2014 film crews, Moscow and Leningrad painters, a strange concentration of talent in a provincial city.',
+  1950: 'The generation trained in the Russian academies comes home. Academic modelling starts to feel too slow for what they want to say.',
+  1960: 'The Thaw. Poplars, wet asphalt, new concrete and a sudden permission to look at ornament, at Matisse and at one\u2019s own grandparents in the same breath.',
+  1970: 'The prospekts are finished, the theatres full. Public commissions grow larger while easel painting quietly turns private.',
+  1980: 'Stagnation, then Zheltoqsan in December 1986. The mood in painting goes inward, allegorical and slower.',
+  1990: 'Independence, empty commissions and open subjects at once. Studios survive on almost nothing; the archive of these years is the thinnest.',
+  2000: 'Private galleries appear and the market begins to decide what is kept. State collections stop growing.',
+  2010: 'The century closes on an archive honest about its gaps rather than filling them.'
+};
+
+const DECADES = [
+  { year: 1910, range: '1910 — 1919', title: 'Before the easel',
+    blurb: 'Verny is a garrison town of clay walls and irrigation ditches. One painter is working here, and he came as a surveyor.',
+    artistIds: ['khludov'] },
+  { year: 1920, range: '1920 — 1929', title: 'Workers\u2019 studios',
+    blurb: 'Evening studios open in Alma-Ata and take in students who have never seen an oil painting. The first Kazakh easel painters are among them.',
+    artistIds: ['khludov', 'kasteyev'], emptyNote: 'No plates catalogued for this decade. Kasteyev is still a student in Khludov\u2019s studio.' },
+  { year: 1930, range: '1930 — 1939', title: 'The first easels',
+    blurb: 'The railway, the dam and the collective farm arrive as subjects at the same moment as the profession itself.',
+    artistIds: ['kasteyev', 'kalmykov', 'khludov', 'cherkassky'] },
+  { year: 1940, range: '1940 — 1949', title: 'War, and a city of evacuees',
+    blurb: 'Studios in Alma-Ata fill with evacuated artists and film crews. Painting narrows to the portrait, the poster and the town in winter.',
+    artistIds: ['kasteyev', 'cherkassky', 'kalmykov', 'ismailov', 'galimbayeva'] },
+  { year: 1950, range: '1950 — 1959', title: 'Return from Leningrad',
+    blurb: 'A generation trained in the Russian academies comes home and finds academic modelling too slow for what it wants to say.',
+    artistIds: ['mambeyev', 'telzhanov', 'kenbayev', 'galimbayeva', 'shayakhmetov', 'ismailova', 'ismailov'] },
+  { year: 1960, range: '1960 — 1969', title: 'The thaw in Almaty',
+    blurb: 'A city of poplars, wet asphalt and new concrete. Painters walked it every morning and brought the light of it back to the easel.',
+    artistIds: ['ismailova', 'aitbayev', 'kasteyev', 'sariyev', 'dzhusupov', 'shardenov', 'kalmykov', 'ismailov'] },
+  { year: 1970, range: '1970 — 1979', title: 'Concrete and poplars',
+    blurb: 'The prospekts are finished and the theatres full. Painting turns to the portrait, the stage set and the long decorative panel.',
+    artistIds: ['sydykhanov', 'togusbayev', 'nurzhumayev', 'mullashev', 'shardenov', 'galimbayeva', 'ismailova'] },
+  { year: 1980, range: '1980 — 1989', title: 'The long panel',
+    blurb: 'Public commissions grow larger and looser at once. Beneath them, easel painting quietly gets more private.',
+    artistIds: ['amanzholov', 'tyulkiyev', 'tolepbay', 'mullashev', 'akanayev', 'aitbayev'] },
+  { year: 1990, range: '1990 — 1999', title: 'After the union',
+    blurb: 'Independence arrives with empty commissions and open subjects at the same time.',
+    artistIds: ['bapishev', 'akanayev', 'tolepbay', 'ismailova', 'mambeyev', 'ismailov'] },
+  { year: 2000, range: '2000 — 2009', title: 'The gallery decade',
+    blurb: 'Private galleries appear in Almaty and the market begins to decide what is kept. The state collections stop growing.',
+    artistIds: ['tolepbay', 'akanayev'], emptyNote: 'No plates catalogued for this decade. Acquisition records for these years are held privately.' },
+  { year: 2010, range: '2010 — 2019', title: 'Still uncatalogued',
+    blurb: 'The century closes on an archive that is honest about its gaps rather than filling them.',
+    artistIds: ['tolepbay'], emptyNote: 'No plates catalogued for this decade. The archive ends where the sourcing ends.' }
+];
+
+const OFFSETS = [0, 16, 48, 72];
+
+const LANGS = [{ id: 'en', label: 'EN' }, { id: 'kk', label: 'ҚАЗ' }, { id: 'ru', label: 'РУС' }];
+
+const UI_EN = {
+  eyebrow: 'A digital archive of Kazakh painting',
+  tagline: 'A century of Almaty read across the easel — one decade at a time, the city in black and white, the canvases in full colour.',
+  scrollToRead: 'Scroll to read',
+  whatThisIs: 'What this is',
+  archiveCaption: 'Almaty, archival photography',
+  whatHeading: 'An archive arranged by decade, not by name',
+  whatLead: 'noKasteyev is a digital gallery of Kazakh art, assembled from open sources. It began as a creative answer to the absence of a full online gallery of paintings at one of the country\u2019s principal museums.',
+  whatBody: 'This is not criticism, and not a call to cancel anyone. The approach is a different one: when something seems to be missing, we make it ourselves. That is how noKasteyev appeared — an independent project, an attempt to make Kazakh art more accessible, to keep its digital heritage, and to help more people discover the work of the country\u2019s painters.',
+  introQuote: 'I painted what I saw on the road between the mountain and the town.',
+  attributed: 'Attributed', undatedNote: 'Undated studio note',
+  gapsNote: 'What the archive does not have, it says plainly. Decades without catalogued plates are left open rather than filled.',
+  howToRead: 'How to read it', howHeading: 'The archive moves sideways',
+  howBody: 'Past this page there is no scrolling down. The century runs left to right, one screen per decade — use the wheel, the arrow keys, or the years along the bottom. A portrait opens a painter file; a plate opens full size.',
+  enterArchive: 'Enter the archive', orKeepScrolling: 'Or keep scrolling', enter1910: 'Begin',
+  platesFromDecade: 'Plates from the decade', scrollHint: 'Scroll or use ← →', none: 'None',
+  plateForms: ['plate', 'plates', 'plates'],
+  paintersHere: 'Painters working in this decade', noPainters: 'No painter files for this decade',
+  factPlates: 'Plates', factPainters: 'Painters', decades: 'Decades', painters: 'Painters',
+  life: 'Life', aTimeline: 'A timeline', styleInfluence: 'Style and influence', theHand: 'The hand',
+  context: 'Context', aroundEasel: 'Around the easel', catalogue: 'Catalogue', worksInArchive: 'Works in the archive',
+  awaitingPlate: 'Awaiting plate', notCatalogued: 'Not catalogued', plateAwaited: 'Reproduction · awaited',
+  subject: 'The subject', making: 'How it was made', holding: 'Where it is held',
+  paintedThisYear: 'In the archive from this year', undatedInArchive: 'Year not established. In the archive', byYear: 'Year by year', chronicle: 'Chronicle', noEntry: 'Nothing entered for this year.', undated: 'Undated',
+  noDescription: 'No description entered in the archive.', allWorksBy: 'All works by',
+  prevWork: 'Previous work', nextWork: 'Next work',
+  backToTitle: 'Back to the title screen', prevDecade: 'Previous decade', nextDecade: 'Next decade', close: 'Close',
+  gapsLabel: 'Gaps', gapsValue: 'Stated', location: 'Almaty'
+};
+
+function plural(n, forms) {
+  if (!forms) return '';
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return forms[0];
+  if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return forms[1];
+  return forms[2];
+}
+
+class Component extends DCLogic {
+  state = { index: 0, artistId: null, indexOpen: false, lbList: null, lbIndex: 0, intro: 'in', lang: (typeof localStorage !== 'undefined' && localStorage.getItem('nk-lang')) || 'en' };
+
+  componentDidMount() {
+    this.mountRail();
+    this.mountIntro();
+    import('./i18n.js').then(m => { this.i18n = m.DICT; this.forceUpdate(); }).catch(() => {});
+    this.retry = setInterval(() => { this.mountRail(); this.mountIntro(); }, 800);
+    this.onKey = e => {
+      if (this.state.intro !== 'done') {
+        if (e.key === 'Escape') this.enterArchive();
+        return;
+      }
+      if (e.key === 'Escape') return this.setState({ artistId: null, indexOpen: false, lbList: null });
+      if (this.state.lbList) {
+        if (e.key === 'ArrowRight') this.step(1);
+        if (e.key === 'ArrowLeft') this.step(-1);
+        return;
+      }
+      if (this.state.artistId || this.state.indexOpen) return;
+      if (e.key === 'ArrowRight') this.go(this.state.index + 1);
+      if (e.key === 'ArrowLeft') {
+        if (this.state.index === 0) this.exitToIntro(); else this.go(this.state.index - 1);
+      }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.onResize = () => {
+      const roomy = window.innerHeight >= 880;
+      if (roomy !== this.state.roomy) this.setState({ roomy });
+    };
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+    this.onAnyScroll = () => {
+      const box = document.getElementById('nk-chronicle');
+      const fill = document.getElementById('nk-chronicle-fill');
+      if (!box || !fill) return;
+      const r = box.getBoundingClientRect();
+      const mark = window.innerHeight * 0.55;
+      const p = Math.max(0, Math.min(1, (mark - r.top) / Math.max(1, r.height)));
+      fill.style.height = Math.round(p * r.height) + 'px';
+      box.querySelectorAll('[data-chron-row]').forEach(row => {
+        const rr = row.getBoundingClientRect();
+        const on = rr.top < window.innerHeight * 0.82 && rr.bottom > 0;
+        row.style.opacity = on ? '1' : '.28';
+        row.style.transform = on ? 'none' : 'translateY(14px)';
+        const dot = row.querySelector('[data-chron-dot]');
+        if (dot) dot.style.background = rr.top < mark ? 'var(--pigment-ochre)' : 'var(--paper-1)';
+      });
+    };
+    document.addEventListener('scroll', this.onAnyScroll, true);
+  }
+  componentDidUpdate() {
+    if (this.onAnyScroll) requestAnimationFrame(this.onAnyScroll);
+  }
+  componentWillUnmount() {
+    clearInterval(this.retry);
+    document.removeEventListener('scroll', this.onAnyScroll, true);
+    window.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('resize', this.onResize);
+    if (this.rail) {
+      this.rail.removeEventListener('scroll', this.onScroll);
+      this.rail.removeEventListener('wheel', this.onWheel);
+    }
+  }
+  mountRail() {
+    const el = document.getElementById('nk-rail');
+    if (!el || el === this.rail) return;
+    this.rail = el;
+    this.onScroll = () => {
+      const i = Math.round(el.scrollLeft / el.clientWidth);
+      if (i !== this.state.index) this.setState({ index: i });
+    };
+    this.onWheel = e => {
+      const d = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (!d) return;
+      const inner = e.target.closest && e.target.closest('[data-nested-scroll]');
+      if (inner) {
+        const vert = inner.scrollHeight > inner.clientHeight + 1;
+        const pos = vert ? inner.scrollTop : inner.scrollLeft;
+        const max = vert
+          ? inner.scrollHeight - inner.clientHeight
+          : inner.scrollWidth - inner.clientWidth;
+        if (max > 1 && !((d < 0 && pos <= 0) || (d > 0 && pos >= max - 1))) return;
+      }
+      e.preventDefault();
+      if (d < 0 && el.scrollLeft <= 2 && this.state.intro === 'done') { this.exitToIntro(); return; }
+      el.scrollLeft += d;
+    };
+    el.addEventListener('scroll', this.onScroll, { passive: true });
+    el.addEventListener('wheel', this.onWheel, { passive: false });
+  }
+
+  mountIntro() {
+    const el = document.getElementById('nk-intro');
+    if (!el || el === this.intro) return;
+    this.intro = el;
+    this.introWheel = e => {
+      if (this.state.intro !== 'in') return;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 6;
+      if (e.deltaY > 0 && atBottom) { e.preventDefault(); this.enterArchive(); }
+    };
+    el.addEventListener('wheel', this.introWheel, { passive: false });
+  }
+  enterArchive = () => {
+    if (this.state.intro !== 'in') return;
+    this.lock = Date.now();
+    this.setState({ intro: 'out' });
+    setTimeout(() => this.setState({ intro: 'done' }), 1000);
+  };
+
+  exitToIntro = () => {
+    if (this.state.intro !== 'done') return;
+    if (this.lock && Date.now() - this.lock < 1400) return;
+    this.lock = Date.now();
+    this.intro = null;
+    this.setState({ intro: 'out', artistId: null, indexOpen: false, lbList: null });
+    setTimeout(() => {
+      this.mountIntro();
+      const el = document.getElementById('nk-intro');
+      if (el) el.scrollTop = el.scrollHeight;
+      requestAnimationFrame(() => this.setState({ intro: 'in' }));
+    }, 30);
+  };
+
+  panels() { return 1 + DECADES.length; }
+  go(i) {
+    const el = this.rail || document.getElementById('nk-rail');
+    if (!el) return;
+    const n = Math.max(0, Math.min(this.panels() - 1, i));
+    el.scrollTo({ left: n * el.clientWidth, behavior: 'smooth' });
+  }
+  goYear(y) { this.go(1 + DECADES.findIndex(d => d.year === y)); }
+
+  artistById(id) { return ARTISTS.find(a => a.id === id); }
+  step(d) {
+    this.setState(s => {
+      if (!s.lbList) return null;
+      const n = s.lbList.length;
+      return { lbIndex: (s.lbIndex + d + n) % n };
+    });
+  }
+  setLang = id => {
+    try { localStorage.setItem('nk-lang', id); } catch (err) {}
+    this.setState({ lang: id });
+  };
+  tw(id) { return ((this._T && this._T.works) || {})[id] || {}; }
+  ta(id) { return ((this._T && this._T.artists) || {})[id] || {}; }
+
+  decorate(list) {
+    const out = list.map((w, i) => {
+      const n = Object.assign({}, WORK_NOTES[w.id] || {}, this.tw(w.id) || {});
+      const artistName = this.ta(w.artistId).name || this.artistById(w.artistId).name;
+      const subject = n.subject, making = n.making, holding = n.holding;
+      return {
+        ...w,
+        ...this.tw(w.id),
+        artist: artistName,
+        offset: OFFSETS[i % OFFSETS.length],
+        year: /^\d{4}$/.test(w.year) ? w.year : (((this._T && this._T.ui && this._T.ui.undated) || UI_EN.undated)),
+        line: [w.medium, /^\d{4}$/.test(w.year) ? w.year : (((this._T && this._T.ui && this._T.ui.undated) || UI_EN.undated))].filter(Boolean).join(' · '),
+        fileLine: this.ta(w.artistId).fileLine || this.artistById(w.artistId).fileLine,
+        artistLink: ((this._T && this._T.ui && this._T.ui.allWorksBy) || UI_EN.allWorksBy) + ' ' + artistName,
+        subject, making, holding,
+        hasSubject: !!subject, hasMaking: !!making, hasHolding: !!holding,
+        noNotes: !subject && !making && !holding
+      };
+    });
+    out.forEach((w, i) => { w.open = () => this.setState({ lbList: out, lbIndex: i }); });
+    return out;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const T = (this.i18n && this.i18n[s.lang]) || {};
+    this._T = T;
+    const L = Object.assign({}, UI_EN, T.ui || {});
+    const TD = T.decades || {};
+    const activeYear = s.index === 0 ? null : DECADES[s.index - 1].year;
+
+    const decades = DECADES.map(e => {
+      const works = this.decorate(WORKS.filter(w => w.decade === e.year));
+      const artists = e.artistIds.map(id => {
+        const a = this.artistById(id);
+        return { ...a, ...this.ta(id), open: () => this.setState({ artistId: id, indexOpen: false }) };
+      });
+      return {
+        ...e,
+        ...(TD[e.year] || {}),
+        first: e.year === DECADES[0].year,
+        back: () => this.go(0),
+        works, empty: works.length === 0,
+        plateCount: works.length ? works.length + ' ' + plural(works.length, L.plateForms) : L.none,
+        artists,
+        artistsLabel: artists.length ? L.paintersHere : L.noPainters,
+        facts: [
+          { label: L.factPlates, value: works.length ? String(works.length) : '—' },
+          { label: L.factPainters, value: artists.length ? String(artists.length) : '—' }
+        ]
+      };
+    });
+
+    const backdrops = DECADES.map((e, i) => {
+      const on = s.index === 0 ? i === 0 : i === s.index - 1;
+      return {
+        src: 'assets/era-' + e.year + '.png',
+        style: {
+          position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+          filter: 'var(--filter-archive)',
+          opacity: on ? 1 : 0,
+          transform: on ? 'scale(1.02)' : 'scale(1.07)',
+          transition: 'opacity var(--dur-era) var(--ease-veil), transform 7000ms var(--ease-veil)'
+        }
+      };
+    });
+
+    const ticks = DECADES.map((e, i) => {
+      const on = activeYear === e.year;
+      return {
+        year: e.year,
+        go: () => this.go(i + 1),
+        style: {
+          background: 'none', border: 'none', padding: '0 2px', cursor: 'pointer',
+          fontFamily: 'var(--font-display)', lineHeight: 1,
+          fontSize: on ? '32px' : '15px',
+          color: 'var(--paper-1)', opacity: on ? 1 : 0.38,
+          transition: 'opacity var(--dur-base) var(--ease-archive), font-size var(--dur-base) var(--ease-archive)'
+        }
+      };
+    });
+
+    const artist = s.artistId ? (() => {
+      const a = Object.assign({}, this.artistById(s.artistId), this.ta(s.artistId));
+      return {
+        ...a,
+        hasTimeline: !!(a.timeline && a.timeline.length),
+        hasStyle: !!a.style, hasQuote: !!a.quote, hasContext: !!a.context,
+        hasDetail: !!(a.style || a.quote || a.context || (a.timeline && a.timeline.length)),
+        works: this.decorate(WORKS.filter(w => w.artistId === a.id)),
+        slots: (() => {
+          const n = WORKS.filter(w => w.artistId === a.id).length;
+          const pad = Math.max(0, 6 - n);
+          return Array.from({ length: pad }, (_, i) => ({ key: a.id + '-slot-' + i }));
+        })(),
+        catalogueCount: WORKS.filter(w => w.artistId === a.id).length + ' / 6',
+        chronicle: (() => {
+          const works = this.decorate(WORKS.filter(w => w.artistId === a.id));
+          const byYear = {};
+          const push = (y, patch) => {
+            const key = String(y);
+            byYear[key] = byYear[key] || { year: key, note: '', works: [], hasNote: false, hasWorks: false };
+            Object.assign(byYear[key], patch);
+          };
+          (a.timeline || []).forEach(e => push(e.year, { note: e.text, hasNote: !!e.text }));
+          works.forEach(w => {
+            const y = /^\d{4}$/.test(w.year) ? w.year : (L.undated || 'Undated');
+            push(y, {});
+            byYear[y].works.push(w);
+            byYear[y].hasWorks = true;
+          });
+          const rows = Object.values(byYear).sort((x, y) => {
+            const nx = parseInt(x.year, 10), ny = parseInt(y.year, 10);
+            if (isNaN(nx)) return 1;
+            if (isNaN(ny)) return -1;
+            return nx - ny;
+          });
+          let lastDec = null;
+          rows.forEach(r => {
+            r.empty = !r.hasNote && !r.hasWorks;
+            r.workCount = r.works.length ? r.works.length + '' : '';
+            const yn = parseInt(r.year, 10);
+            const dec = isNaN(yn) ? null : Math.floor(yn / 10) * 10;
+            const moodT = (this._T && this._T.mood) || {};
+            const text = dec ? (moodT[dec] || DECADE_MOOD[dec] || '') : '';
+            r.mood = (dec && dec !== lastDec) ? text : '';
+            if (dec) lastDec = dec;
+            r.hasMood = !!r.mood;
+
+          });
+          return rows;
+        })(),
+        hasChronicle: !!((a.timeline && a.timeline.length) || WORKS.some(w => w.artistId === a.id))
+      };
+    })() : null;
+    const lbWork = s.lbList ? s.lbList[s.lbIndex] : null;
+
+    const out = s.intro === 'out';
+    return {
+      roomy: s.roomy !== false,
+      chronicleWorkStyle: {
+        display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', alignItems: 'flex-start',
+        padding: '10px', background: 'var(--paper-0)', border: '1px solid var(--line-hairline)',
+        boxSizing: 'border-box', cursor: 'pointer', font: 'inherit',
+        boxShadow: '0 1px 2px rgba(20,18,15,.06)'
+      },
+      workArtistLinkStyle: {
+        alignSelf: 'flex-start', background: 'none', border: 'none', borderBottom: '1px solid var(--line-hairline)',
+        padding: '0 0 4px', cursor: 'pointer', font: 'inherit',
+        fontFamily: 'var(--font-ui)', fontSize: 'var(--type-micro)',
+        letterSpacing: 'var(--tracking-micro)', textTransform: 'uppercase', color: 'var(--text-muted)'
+      },
+      openArtistFromWork: () => {
+        const w = s.lbList ? s.lbList[s.lbIndex] : null;
+        if (w) this.setState({ lbList: null, artistId: w.artistId });
+      },
+      plateMountStyle: {
+        display: 'flex', flexDirection: 'column', width: '100%', padding: '12px', boxSizing: 'border-box',
+        background: 'var(--paper-0)', border: '1px solid var(--line-hairline)',
+        boxShadow: '0 1px 2px rgba(20,18,15,.06), 0 12px 32px rgba(20,18,15,.10)',
+        cursor: 'pointer', textAlign: 'left', font: 'inherit'
+      },
+      plateSlotStyle: {
+        display: 'flex', flexDirection: 'column', width: '100%', padding: '12px', boxSizing: 'border-box',
+        background: 'var(--paper-0)', border: '1px solid var(--line-hairline)'
+      },
+      artistTileStyle: {
+        flex: '0 0 clamp(96px,12vh,124px)', height: '100%', minHeight: 0,
+        display: 'flex', flexDirection: 'column', gap: 'var(--space-2)',
+        background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left'
+      },
+      introOpen: s.intro !== 'done',
+      introStyle: {
+        position: 'fixed', inset: 0, zIndex: 300, overflow: 'hidden',
+        opacity: out ? 0 : 1,
+        transform: out ? 'translateY(-3%) scale(.97)' : 'none',
+        transition: 'opacity 1000ms var(--ease-veil), transform 1000ms var(--ease-veil)',
+        pointerEvents: out ? 'none' : 'auto'
+      },
+      introFacts: [
+        { label: L.decades, value: '1910 — 2010' },
+        { label: L.painters, value: '4' },
+        { label: L.factPlates, value: '10' },
+        { label: L.gapsLabel, value: L.gapsValue }
+      ],
+      L,
+      langs: LANGS.map(l => ({
+        label: l.label,
+        go: () => this.setLang(l.id),
+        style: {
+          background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+          fontFamily: 'var(--font-ui)', fontSize: 'var(--type-micro)', letterSpacing: 'var(--tracking-micro)',
+          textTransform: 'uppercase', color: 'var(--paper-1)', opacity: s.lang === l.id ? 1 : 0.42,
+          transition: 'opacity var(--dur-fast) var(--ease-archive)'
+        }
+      })),
+      langsInk: LANGS.map(l => ({
+        label: l.label,
+        go: () => this.setLang(l.id),
+        style: {
+          background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+          fontFamily: 'var(--font-ui)', fontSize: 'var(--type-micro)', letterSpacing: 'var(--tracking-micro)',
+          textTransform: 'uppercase', color: 'var(--text-display)', opacity: s.lang === l.id ? 1 : 0.42,
+          transition: 'opacity var(--dur-fast) var(--ease-archive)'
+        }
+      })),
+      enterArchive: this.enterArchive,
+      decades, backdrops, ticks,
+      activeDecadeId: activeYear ? 'd' + activeYear : 'hero',
+      navItems: [1930, 1960, 1980, 2000].map(y => ({ id: 'd' + y, label: String(y) })),
+      headerRight: L.location + ' · ' + (activeYear || '1910—2019'),
+      goToDecade: id => this.goYear(Number(String(id).replace('d', ''))),
+      enterFirst: () => this.go(1),
+      prevDecade: () => this.go(s.index - 1),
+      nextDecade: () => this.go(s.index + 1),
+      openIndex: () => this.setState({ indexOpen: true }),
+      closeIndex: () => this.setState({ indexOpen: false }),
+      indexOpen: s.indexOpen,
+      indexSections: [
+        { title: L.decades, items: DECADES.map(e => ({ label: String(e.year), meta: (TD[e.year] || e).title, year: e.year })) },
+        { title: L.painters, items: ARTISTS.map(a => ({ label: this.ta(a.id).name || a.name, meta: a.years, artistId: a.id })) }
+      ],
+      indexSelect: it => {
+        this.setState({ indexOpen: false });
+        if (it.artistId) this.setState({ artistId: it.artistId });
+        else if (it.year) setTimeout(() => this.goYear(it.year), 60);
+      },
+      artistOpen: !!artist,
+      artist: artist || {},
+      closeArtist: () => this.setState({ artistId: null }),
+      lightboxOpen: !!lbWork,
+      lightboxWork: lbWork || {},
+      closeLightbox: () => this.setState({ lbList: null }),
+      prevWork: () => this.step(-1),
+      nextWork: () => this.step(1)
+    };
+  }
+}
+
+</script>
+</body>
+</html>
