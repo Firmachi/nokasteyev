@@ -28,6 +28,18 @@
     #nk-rail::-webkit-scrollbar, #nk-intro::-webkit-scrollbar { display: none; }
     #nk-rail, #nk-intro { scrollbar-width: none; }
     [data-on-archive] img[src*="lucide-static"] { filter: invert(1); opacity: 1; }
+    [data-index-overlay] { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; box-sizing: border-box; }
+@keyframes nk-rail-r{0.0%{transform:translate3d(-11.00cqw,0,-242.73cqw) rotateY(-6.0deg)}4.2%{transform:translate3d(-3.53cqw,0,-210.72cqw) rotateY(-6.8deg)}8.3%{transform:translate3d(3.23cqw,0,-182.48cqw) rotateY(-7.7deg)}12.5%{transform:translate3d(9.31cqw,0,-157.54cqw) rotateY(-8.5deg)}16.7%{transform:translate3d(14.77cqw,0,-135.54cqw) rotateY(-9.3deg)}20.8%{transform:translate3d(19.63cqw,0,-116.11cqw) rotateY(-10.2deg)}25.0%{transform:translate3d(23.94cqw,0,-98.96cqw) rotateY(-11.0deg)}29.2%{transform:translate3d(27.73cqw,0,-83.83cqw) rotateY(-11.8deg)}33.3%{transform:translate3d(31.05cqw,0,-70.47cqw) rotateY(-12.7deg)}37.5%{transform:translate3d(33.91cqw,0,-58.68cqw) rotateY(-13.5deg)}41.7%{transform:translate3d(36.38cqw,0,-48.28cqw) rotateY(-14.3deg)}45.8%{transform:translate3d(38.46cqw,0,-39.09cqw) rotateY(-15.2deg)}50.0%{transform:translate3d(40.21cqw,0,-30.98cqw) rotateY(-16.0deg)}54.2%{transform:translate3d(41.66cqw,0,-23.83cqw) rotateY(-16.8deg)}58.3%{transform:translate3d(42.83cqw,0,-17.51cqw) rotateY(-17.7deg)}62.5%{transform:translate3d(43.76cqw,0,-11.94cqw) rotateY(-18.5deg)}66.7%{transform:translate3d(44.48cqw,0,-7.01cqw) rotateY(-19.3deg)}70.8%{transform:translate3d(45.02cqw,0,-2.67cqw) rotateY(-20.2deg)}75.0%{transform:translate3d(45.41cqw,0,1.16cqw) rotateY(-21.0deg)}79.2%{transform:translate3d(45.68cqw,0,4.55cqw) rotateY(-21.8deg)}83.3%{transform:translate3d(45.85cqw,0,7.53cqw) rotateY(-22.7deg)}87.5%{transform:translate3d(45.94cqw,0,10.17cqw) rotateY(-23.5deg)}91.7%{transform:translate3d(45.98cqw,0,12.50cqw) rotateY(-24.3deg)}95.8%{transform:translate3d(46.00cqw,0,14.55cqw) rotateY(-25.2deg)}100.0%{transform:translate3d(46.00cqw,0,16.36cqw) rotateY(-26.0deg)}}
+    @keyframes nk-rail-l{0.0%{transform:translate3d(11.00cqw,0,-242.73cqw) rotateY(6.0deg)}4.2%{transform:translate3d(3.53cqw,0,-210.72cqw) rotateY(6.8deg)}8.3%{transform:translate3d(-3.23cqw,0,-182.48cqw) rotateY(7.7deg)}12.5%{transform:translate3d(-9.31cqw,0,-157.54cqw) rotateY(8.5deg)}16.7%{transform:translate3d(-14.77cqw,0,-135.54cqw) rotateY(9.3deg)}20.8%{transform:translate3d(-19.63cqw,0,-116.11cqw) rotateY(10.2deg)}25.0%{transform:translate3d(-23.94cqw,0,-98.96cqw) rotateY(11.0deg)}29.2%{transform:translate3d(-27.73cqw,0,-83.83cqw) rotateY(11.8deg)}33.3%{transform:translate3d(-31.05cqw,0,-70.47cqw) rotateY(12.7deg)}37.5%{transform:translate3d(-33.91cqw,0,-58.68cqw) rotateY(13.5deg)}41.7%{transform:translate3d(-36.38cqw,0,-48.28cqw) rotateY(14.3deg)}45.8%{transform:translate3d(-38.46cqw,0,-39.09cqw) rotateY(15.2deg)}50.0%{transform:translate3d(-40.21cqw,0,-30.98cqw) rotateY(16.0deg)}54.2%{transform:translate3d(-41.66cqw,0,-23.83cqw) rotateY(16.8deg)}58.3%{transform:translate3d(-42.83cqw,0,-17.51cqw) rotateY(17.7deg)}62.5%{transform:translate3d(-43.76cqw,0,-11.94cqw) rotateY(18.5deg)}66.7%{transform:translate3d(-44.48cqw,0,-7.01cqw) rotateY(19.3deg)}70.8%{transform:translate3d(-45.02cqw,0,-2.67cqw) rotateY(20.2deg)}75.0%{transform:translate3d(-45.41cqw,0,1.16cqw) rotateY(21.0deg)}79.2%{transform:translate3d(-45.68cqw,0,4.55cqw) rotateY(21.8deg)}83.3%{transform:translate3d(-45.85cqw,0,7.53cqw) rotateY(22.7deg)}87.5%{transform:translate3d(-45.94cqw,0,10.17cqw) rotateY(23.5deg)}91.7%{transform:translate3d(-45.98cqw,0,12.50cqw) rotateY(24.3deg)}95.8%{transform:translate3d(-46.00cqw,0,14.55cqw) rotateY(25.2deg)}100.0%{transform:translate3d(-46.00cqw,0,16.36cqw) rotateY(26.0deg)}}
+    @media (prefers-reduced-motion: reduce) { [data-stream-card] { animation-play-state: paused !important; } }
+    [data-begin-btn] { position: relative; display: inline-flex; align-items: center; height: 52px; padding: 0; border: 1px solid var(--line-on-archive); background: none; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+    [data-begin-btn] > .nk-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 52px; background: var(--paper-1); transition: width 620ms cubic-bezier(.22,.61,.36,1); }
+    [data-begin-btn]:hover > .nk-fill, [data-begin-btn]:focus-visible > .nk-fill { width: 100%; }
+    [data-begin-btn] > .nk-arrow { position: relative; display: flex; align-items: center; justify-content: center; width: 52px; flex: 0 0 52px; transition: transform 620ms cubic-bezier(.22,.61,.36,1); }
+    [data-begin-btn] > .nk-arrow img { width: 18px; height: 18px; filter: none; opacity: .9; }
+    [data-begin-btn]:hover > .nk-arrow { transform: translateX(4px); }
+    [data-begin-btn] > .nk-label { position: relative; padding: 0 28px 0 4px; font-family: var(--font-ui); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--paper-1); transition: color 620ms cubic-bezier(.22,.61,.36,1); }
+    [data-begin-btn]:hover > .nk-label { color: var(--ink-0, #14120F); }
     [data-plate-rail] a { display: flex !important; flex-direction: column !important; height: 100%; }
     [data-plate-rail] a { width: fit-content !important; align-items: flex-start; }
     [data-plate-rail] a > img { flex: 0 1 auto; min-height: 0; width: auto !important; height: auto; align-self: flex-start; max-height: clamp(170px, 34vh, 360px); max-width: min(34vw, 420px); object-fit: contain; }
@@ -52,42 +64,45 @@
         </sc-for>
       </div>
 
-      <section style="position:relative;min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--space-5);padding:var(--space-9) var(--gutter-page)">
-        <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.eyebrow }}</div>
-        <h1 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--type-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-display)"><span style="font-style:italic;color:var(--text-faint)">no</span>Kasteyev</h1>
-        <div style="max-width:46ch;font-family:var(--font-editorial);font-style:italic;font-size:var(--type-body-lg);line-height:1.5;color:var(--text-body)">{{ L.tagline }}</div>
+      <section style="position:relative;min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:var(--space-5);padding:var(--space-9) var(--gutter-page);overflow:hidden;container-type:inline-size">
+        <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;perspective:30cqw;perspective-origin:50% 50%">
+          <div style="position:absolute;inset:0;transform-style:preserve-3d">
+            <sc-for list="{{ streamCards }}" as="card" hint-placeholder-count="8">
+              <div data-stream-card="true" style="{{ card.style }}"><img src="{{ card.src }}" alt="" loading="lazy" decoding="async" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;top:22%;height:56%;pointer-events:none;background:radial-gradient(ellipse 40% 100% at 50% 50%,rgba(243,239,231,.96),rgba(243,239,231,.72) 55%,rgba(243,239,231,0))"></div>
+        <div style="position:relative;font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.eyebrow }}</div>
+        <h1 style="position:relative;margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--type-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--text-display)"><span style="font-style:italic;color:var(--text-faint)">no</span>Kasteyev</h1>
+        
         <div style="position:absolute;left:0;right:0;bottom:var(--space-8);display:flex;flex-direction:column;align-items:center;gap:var(--space-3);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">
           <span>{{ L.scrollToRead }}</span>
           <span style="display:block;width:1px;height:56px;background:var(--line-strong);animation:nkDrift 2600ms ease-in-out infinite alternate"></span>
         </div>
       </section>
 
-      <section style="min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:grid;grid-template-columns:42% minmax(0,1fr);border-top:1px solid var(--line-hairline)">
-        <div style="position:relative;overflow:hidden;background:var(--surface-archive)">
-          <img src="assets/era-1960.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--filter-archive)">
-          <div class="nk-grain" style="position:absolute;inset:0;pointer-events:none;opacity:.55"></div>
-          <div style="position:absolute;left:var(--space-7);bottom:var(--space-7);right:var(--space-7);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-2)">{{ L.archiveCaption }}</div>
-        </div>
-        <div style="position:relative;display:flex;flex-direction:column;justify-content:center;padding:var(--space-10) var(--gutter-page);box-sizing:border-box">
-          <div style="display:flex;flex-direction:column;gap:var(--space-7);max-width:54ch">
-            <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.whatThisIs }}</div>
-            <p style="margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(28px,3vw,48px);line-height:1.16;letter-spacing:var(--tracking-display);color:var(--text-display);text-wrap:pretty">{{ L.whatLead }}</p>
-            <div style="padding-top:var(--space-6);border-top:1px solid var(--line-hairline)">
-              <p style="margin:0;font-family:var(--font-ui);font-size:var(--type-body);line-height:var(--leading-body);color:var(--text-muted);text-wrap:pretty">{{ L.whatBody }}</p>
-            </div>
+      <section style="position:relative;min-height:100vh;height:100vh;box-sizing:border-box;scroll-snap-align:start;overflow:hidden;border-top:1px solid var(--line-hairline)">
+        <img src="assets/era-1960.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--filter-archive)">
+        <div class="nk-grain" style="position:absolute;inset:0;pointer-events:none;opacity:.55"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.10),rgba(10,10,10,.55))"></div>
+
+        <div style="position:absolute;right:var(--gutter-page);top:50%;transform:translateY(-50%);width:min(46ch,44vw);max-height:calc(100vh - 2 * var(--space-7));overflow-y:auto;background:var(--paper-1);padding:clamp(20px,3.2vh,40px);box-sizing:border-box;box-shadow:0 2px 4px rgba(20,18,15,.18),0 30px 70px rgba(0,0,0,.34);display:flex;flex-direction:column;gap:clamp(14px,2.4vh,28px)">
+          <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.fromAuthors }}</span>
+          <p style="margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(20px,2.9vh,34px);line-height:1.16;letter-spacing:var(--tracking-display);color:var(--text-display);text-wrap:pretty">{{ L.whatLead }}</p>
+          <p style="margin:0;font-family:var(--font-ui);font-size:clamp(13px,1.6vh,16px);line-height:1.55;color:var(--text-muted);border-top:1px solid var(--line-hairline);padding-top:clamp(12px,2vh,20px);text-wrap:pretty">{{ L.whatBody }}</p>
+          <div style="display:flex;align-items:center;gap:var(--space-6)">
+            <button data-begin-btn="true" onClick="{{ enterArchive }}" aria-label="{{ L.enterArchive }}">
+              <span class="nk-fill" aria-hidden="true"></span>
+              <span class="nk-arrow" aria-hidden="true"><img src="https://unpkg.com/lucide-static@latest/icons/arrow-right.svg" alt=""></span>
+              <span class="nk-label">{{ L.enterArchive }}</span>
+            </button>
           </div>
         </div>
+
+        <div style="position:absolute;left:var(--gutter-page);bottom:var(--space-7);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">{{ L.archiveCaption }}</div>
       </section>
 
-      <section style="min-height:100vh;box-sizing:border-box;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;gap:var(--space-8);padding:var(--space-10) var(--gutter-page);border-top:1px solid var(--line-hairline)">
-        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.SectionHeading" eyebrow="{{ L.howToRead }}" level="{{ 2 }}" hint-size="100%,120px">{{ L.howHeading }}</x-import>
-        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,80px">{{ L.howBody }}</x-import>
-        <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.FactList" items="{{ introFacts }}" columns="{{ 4 }}" hint-size="100%,100px"></x-import>
-        <div style="display:flex;align-items:center;gap:var(--space-6);margin-top:var(--space-4)">
-          <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Button" size="lg" on-click="{{ enterArchive }}" icon-after="arrow-right" hint-size="auto,48px">{{ L.enterArchive }}</x-import>
-          <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.orKeepScrolling }}</span>
-        </div>
-      </section>
     </div>
   </div>
 </sc-if>
@@ -119,7 +134,11 @@
     <h1 style="margin:0;font-family:var(--font-display);font-weight:400;font-size:var(--type-display-1);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--paper-1)"><span style="font-style:italic;opacity:.42">no</span>Kasteyev</h1>
     <div style="max-width:46ch;font-family:var(--font-editorial);font-style:italic;font-size:var(--type-body-lg);line-height:1.5;color:var(--paper-2)">{{ L.tagline }}</div>
     <div data-on-archive="true" style="display:flex;gap:var(--space-4);margin-top:var(--space-4)">
-      <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Button" variant="secondary" on-archive="{{ true }}" on-click="{{ enterFirst }}" icon-after="arrow-right" hint-size="auto,40px">{{ L.enter1910 }}</x-import>
+      <button data-begin-btn="true" onClick="{{ enterFirst }}" aria-label="{{ L.enter1910 }}">
+        <span class="nk-fill" aria-hidden="true"></span>
+        <span class="nk-arrow" aria-hidden="true"><img src="https://unpkg.com/lucide-static@latest/icons/arrow-right.svg" alt=""></span>
+        <span class="nk-label">{{ L.enter1910 }}</span>
+      </button>
       
     </div>
   </section>
@@ -134,8 +153,10 @@
               <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-left" label="{{ L.backToTitle }}" on-archive="{{ true }}" on-click="{{ era.back }}" hint-size="30px,30px"></x-import>
             </div>
           </sc-if>
-          <div style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3);margin-bottom:var(--space-4)">{{ era.range }}</div>
-          <div style="font-family:var(--font-display);font-weight:400;font-size:clamp(40px,8vh,92px);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--paper-1)">{{ era.year }}</div>
+          <div style="display:flex;align-items:baseline;gap:var(--space-4);flex-wrap:nowrap">
+            <span style="font-family:var(--font-display);font-weight:400;font-size:clamp(40px,8vh,92px);line-height:var(--leading-display);letter-spacing:var(--tracking-display);color:var(--paper-1)">{{ era.year }}</span>
+            <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3);white-space:nowrap">{{ era.rangeTail }}</span>
+          </div>
           <h2 style="margin:var(--space-3) 0 0;font-family:var(--font-editorial);font-style:italic;font-weight:400;font-size:clamp(20px,3vh,32px);line-height:1.2;color:var(--paper-1)">{{ era.title }}</h2>
         </div>
         <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" lead="{{ true }}" on-archive="{{ true }}" style="max-width:40ch" hint-size="100%,80px">{{ era.blurb }}</x-import>
@@ -297,7 +318,7 @@
 
 <sc-if value="{{ indexOpen }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;z-index:210;animation:nkFade 420ms cubic-bezier(.22,.61,.36,1)">
-    <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IndexOverlay" open="{{ true }}" sections="{{ indexSections }}" on-select="{{ indexSelect }}" on-close="{{ closeIndex }}" style="position:fixed" hint-size="100%,100%"></x-import>
+    <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IndexOverlay" open="{{ true }}" sections="{{ indexSections }}" on-select="{{ indexSelect }}" on-close="{{ closeIndex }}" data-index-overlay="true" style="position:fixed" hint-size="100%,100%"></x-import>
   </div>
 </sc-if>
 
@@ -564,6 +585,16 @@ const ARTISTS = [
   }
 ];
 
+const BIO = {
+  khludov:{}, kalmykov:{o:'Samara',s:'St Petersburg'}, cherkassky:{o:'Bila Tserkva',s:'Kyiv'},
+  ismailov:{}, galimbayeva:{o:'Issyk',s:'Moscow'}, kenbayev:{s:'Moscow'},
+  telzhanov:{s:'Leningrad'}, shardenov:{s:'Leningrad'}, mambeyev:{o:'Almaty region',s:'Leningrad'},
+  shayakhmetov:{o:'Kokchetav',s:'Alma-Ata'}, ismailova:{o:'Alma-Ata',s:'Leningrad'},
+  sariyev:{}, togusbayev:{}, sydykhanov:{}, aitbayev:{o:'Kyzylorda',s:'Alma-Ata'},
+  dzhusupov:{}, nurzhumayev:{}, kasteyev:{o:'Zhetysu',s:'Alma-Ata'}, mullashev:{s:'Xinjiang'},
+  amanzholov:{}, tyulkiyev:{}, akanayev:{}, bapishev:{}, tolepbay:{}
+};
+
 const WORKS = [
   { id: 'w-kh1', title: 'The Messenger', year: '1916', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/plate-1.png', decade: 1910 },
   { id: 'w-ka1', title: 'Turksib', year: '1932', artistId: 'kasteyev', medium: 'Watercolour on paper', src: 'assets/work-turksib.png', decade: 1930 },
@@ -720,11 +751,14 @@ const UI_EN = {
   eyebrow: 'A digital archive of Kazakh painting',
   tagline: 'A century of Almaty read across the easel — one decade at a time, the city in black and white, the canvases in full colour.',
   scrollToRead: 'Scroll to read',
-  whatThisIs: 'What this is',
+  whatThisIs: 'What this is', fromAuthors: 'From the authors',
+  factOrigin: 'From', factSchool: 'Trained', factInArchive: 'In the archive',
+  notEstablished: 'Not established', noPlate: 'No plate',
+  bornYear: 'Born {y}', datesUnknown: 'Dates not in the archive', places: {}, mediums: {},
   archiveCaption: 'Almaty, archival photography',
   whatHeading: 'An archive arranged by decade, not by name',
-  whatLead: 'noKasteyev is a digital gallery of Kazakh art, assembled from open sources. It began as a creative answer to the absence of a full online gallery of paintings at one of the country\u2019s principal museums.',
-  whatBody: 'This is not criticism, and not a call to cancel anyone. The approach is a different one: when something seems to be missing, we make it ourselves. That is how noKasteyev appeared — an independent project, an attempt to make Kazakh art more accessible, to keep its digital heritage, and to help more people discover the work of the country\u2019s painters.',
+  whatLead: 'noKasteyev is a creative project about the artists of Kazakhstan.',
+  whatBody: 'Kazakh visual art is often reduced to a single name. We want to show that alongside Kasteyev there are dozens of artists just as strong and distinctive. noKasteyev is an independent non-profit project that brings their works and stories together in one place.',
   introQuote: 'I painted what I saw on the road between the mountain and the town.',
   attributed: 'Attributed', undatedNote: 'Undated studio note',
   gapsNote: 'What the archive does not have, it says plainly. Decades without catalogued plates are left open rather than filled.',
@@ -907,13 +941,19 @@ class Component extends DCLogic {
       const n = Object.assign({}, WORK_NOTES[w.id] || {}, this.tw(w.id) || {});
       const artistName = this.ta(w.artistId).name || this.artistById(w.artistId).name;
       const subject = n.subject, making = n.making, holding = n.holding;
+      const M = ((this._T && this._T.ui && this._T.ui.mediums) || {});
+      let med = w.medium || '';
+      Object.keys(M).forEach(k => { med = med.split(k).join(M[k]); });
+      const cmU = ((this._T && this._T.ui && this._T.ui.cm) || '');
+      if (cmU) med = med.split(' cm').join(' ' + cmU);
       return {
         ...w,
         ...this.tw(w.id),
+        medium: med,
         artist: artistName,
         offset: OFFSETS[i % OFFSETS.length],
         year: /^\d{4}$/.test(w.year) ? w.year : (((this._T && this._T.ui && this._T.ui.undated) || UI_EN.undated)),
-        line: [w.medium, /^\d{4}$/.test(w.year) ? w.year : (((this._T && this._T.ui && this._T.ui.undated) || UI_EN.undated))].filter(Boolean).join(' · '),
+        line: [med, /^\d{4}$/.test(w.year) ? w.year : (((this._T && this._T.ui && this._T.ui.undated) || UI_EN.undated))].filter(Boolean).join(' · '),
         fileLine: this.ta(w.artistId).fileLine || this.artistById(w.artistId).fileLine,
         artistLink: ((this._T && this._T.ui && this._T.ui.allWorksBy) || UI_EN.allWorksBy) + ' ' + artistName,
         subject, making, holding,
@@ -930,6 +970,7 @@ class Component extends DCLogic {
     const T = (this.i18n && this.i18n[s.lang]) || {};
     this._T = T;
     const L = Object.assign({}, UI_EN, T.ui || {});
+    this._L = L;
     const TD = T.decades || {};
     const activeYear = s.index === 0 ? null : DECADES[s.index - 1].year;
 
@@ -945,6 +986,7 @@ class Component extends DCLogic {
         first: e.year === DECADES[0].year,
         back: () => this.go(0),
         works, empty: works.length === 0,
+        rangeTail: '— ' + (e.year + 9),
         plateCount: works.length ? works.length + ' ' + plural(works.length, L.plateForms) : L.none,
         artists,
         artistsLabel: artists.length ? L.paintersHere : L.noPainters,
@@ -961,7 +1003,7 @@ class Component extends DCLogic {
         src: 'assets/era-' + e.year + '.png',
         style: {
           position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
-          filter: 'var(--filter-archive)',
+          filter: e.year >= 1990 ? 'none' : 'var(--filter-archive)',
           opacity: on ? 1 : 0,
           transform: on ? 'scale(1.02)' : 'scale(1.07)',
           transition: 'opacity var(--dur-era) var(--ease-veil), transform 7000ms var(--ease-veil)'
@@ -988,6 +1030,13 @@ class Component extends DCLogic {
       const a = Object.assign({}, this.artistById(s.artistId), this.ta(s.artistId));
       return {
         ...a,
+        years: (() => {
+          const y = a.years || '';
+          const m = /^Born (\d{4})$/.exec(y);
+          if (m) return (L.bornYear || 'Born {y}').replace('{y}', m[1]);
+          if (/^Dates not in the archive$/.test(y)) return L.datesUnknown || 'Dates not in the archive';
+          return y;
+        })(),
         hasTimeline: !!(a.timeline && a.timeline.length),
         hasStyle: !!a.style, hasQuote: !!a.quote, hasContext: !!a.context,
         hasDetail: !!(a.style || a.quote || a.context || (a.timeline && a.timeline.length)),
@@ -998,6 +1047,19 @@ class Component extends DCLogic {
           return Array.from({ length: pad }, (_, i) => ({ key: a.id + '-slot-' + i }));
         })(),
         catalogueCount: WORKS.filter(w => w.artistId === a.id).length + ' / 6',
+        facts: (() => {
+          const b = BIO[a.id] || {};
+          const places = L.places || {};
+          const p = v => v ? (places[v] || v) : (L.notEstablished || 'Not established');
+          const n = WORKS.filter(w => w.artistId === a.id).length;
+          const forms = L.plateForms || ['plate', 'plates', 'plates'];
+          const form = n === 1 ? forms[0] : (n < 5 ? forms[1] : forms[2]);
+          return [
+            { label: L.factOrigin, value: p(b.o) },
+            { label: L.factSchool, value: p(b.s) },
+            { label: L.factInArchive, value: n ? n + ' ' + form : (L.noPlate || 'No plate') }
+          ];
+        })(),
         chronicle: (() => {
           const works = this.decorate(WORKS.filter(w => w.artistId === a.id));
           const byYear = {};
@@ -1109,10 +1171,31 @@ class Component extends DCLogic {
         }
       })),
       enterArchive: this.enterArchive,
+      streamCards: (() => {
+        const pool = WORKS.filter(w => w.src && w.src.indexOf('plate-') < 0).map(w => w.src);
+        const n = 7, speed = 22, out = [];
+        ['r', 'l'].forEach(side => {
+          for (let i = 0; i < n; i++) {
+            out.push({
+              key: side + i,
+              src: pool[(side === 'r' ? i : i + 4) % pool.length],
+              style: {
+                position: 'absolute', left: '50%', top: '52%',
+                width: '15cqw', height: '20cqw', marginLeft: '-7.5cqw', marginTop: '-10cqw',
+                overflow: 'hidden', backfaceVisibility: 'hidden',
+                boxShadow: '0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.45)',
+                animation: 'nk-rail-' + side + ' ' + speed + 's linear infinite',
+                animationDelay: (-(i * speed) / n).toFixed(2) + 's'
+              }
+            });
+          }
+        });
+        return out;
+      })(),
       decades, backdrops, ticks,
       activeDecadeId: activeYear ? 'd' + activeYear : 'hero',
-      navItems: [1930, 1960, 1980, 2000].map(y => ({ id: 'd' + y, label: String(y) })),
-      headerRight: L.location + ' · ' + (activeYear || '1910—2019'),
+      navItems: [],
+      headerRight: L.location + ' · Firmachi',
       goToDecade: id => this.goYear(Number(String(id).replace('d', ''))),
       enterFirst: () => this.go(1),
       prevDecade: () => this.go(s.index - 1),
