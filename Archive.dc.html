@@ -110,7 +110,7 @@
       </section>
 
       <section style="position:relative;min-height:100vh;height:100vh;box-sizing:border-box;scroll-snap-align:start;overflow:hidden;border-top:1px solid var(--line-hairline)">
-        <img src="assets/era-1960.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--filter-archive)">
+        <img src="assets/bg/era-1960.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:var(--filter-archive)">
         <div class="nk-grain" style="position:absolute;inset:0;pointer-events:none;opacity:.55"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.10),rgba(10,10,10,.55))"></div>
 
@@ -1175,7 +1175,7 @@ const LANGS = [{ id: 'en', label: 'EN' }, { id: 'kk', label: 'ҚАЗ' }, { id: '
 const UI_EN = {
   mapLink: 'Map',
   prevPainters: 'Previous painters', nextPainters: 'More painters',
-  srcHeading: "Sources", srcBio: "Biography", srcPhoto: "Portrait photo", srcTitle: "Title and date", sourcesNote: "Sources: artists’ biographies are retold from Wikipedia; free-licence portraits and Khludov’s titles come from Wikimedia Commons.",
+  srcHeading: "Sources", srcBio: "Biography", srcPhoto: "Portrait photo", srcTitle: "Title and date", sourcesNote: "Sources: artists’ biographies are retold from Wikipedia; free-licence portraits and Khludov’s titles come from Wikimedia Commons; archive photographs of Verny and Alma-Ata 1880s–1940s are public domain (Wikimedia Commons), except the Kazan church, 1944–45: Metropolitan District in Kazakhstan, CC BY 4.0.",
   eyebrow: 'A digital archive of Kazakh painting',
   tagline: 'A project to bring Kazakh art to a wider audience: a century of painting.',
   scrollToRead: 'Scroll to read',
@@ -1472,7 +1472,7 @@ class Component extends DCLogic {
     const backdrops = DECADES.map((e, i) => {
       const on = s.index === 0 ? i === 0 : i === s.index - 1;
       return {
-        src: this._loaded.has(i) ? 'assets/era-' + e.year + '.webp' : 'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
+        src: this._loaded.has(i) ? 'assets/bg/era-' + e.year + '.webp' : 'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
         style: {
           position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
           filter: e.year >= 1990 ? 'none' : 'var(--filter-archive)',
