@@ -116,6 +116,7 @@
           <span style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.fromAuthors }}</span>
           <p style="margin:0;font-family:var(--font-display);font-weight:400;font-size:clamp(20px,2.9vh,34px);line-height:1.16;letter-spacing:var(--tracking-display);color:var(--text-display);text-wrap:pretty">{{ L.whatLead }}</p>
           <p style="margin:0;font-family:var(--font-ui);font-size:clamp(13px,1.6vh,16px);line-height:1.55;color:var(--text-muted);border-top:1px solid var(--line-hairline);padding-top:clamp(12px,2vh,20px);text-wrap:pretty">{{ L.whatBody }}</p>
+          <p style="margin:0;font-family:var(--font-ui);font-size:clamp(12px,1.4vh,14px);line-height:1.55;color:var(--text-faint);text-wrap:pretty">{{ L.sourcesNote }}</p>
           <div style="display:flex;align-items:center;gap:var(--space-6)">
             <button data-begin-btn="true" onClick="{{ enterArchive }}" aria-label="{{ L.enterArchive }}">
               <span class="nk-fill" aria-hidden="true"></span>
@@ -251,6 +252,14 @@
           </div>
           <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" lead="{{ true }}" hint-size="100%,60px">{{ artist.lead }}</x-import>
           <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,120px">{{ artist.bio }}</x-import>
+          <sc-if value="{{ artist.hasSources }}" hint-placeholder-val="{{ false }}">
+            <div data-sources="true" style="display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line-hairline);padding-top:var(--space-4);font-family:var(--font-ui);font-size:13px;line-height:1.5;color:var(--text-muted)">
+              <div style="font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.srcHeading }}</div>
+              <sc-for list="{{ artist.sourceRows }}" as="row" hint-placeholder-count="1">
+                <div><span style="color:var(--text-faint)">{{ row.label }}: </span><sc-for list="{{ row.links }}" as="lk" hint-placeholder-count="1"><sc-if value="{{ lk.hasUrl }}" hint-placeholder-val="{{ true }}"><a href="{{ lk.url }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">{{ lk.text }}</a></sc-if><sc-if value="{{ lk.noUrl }}" hint-placeholder-val="{{ false }}"><span>{{ lk.text }}</span></sc-if><span>{{ lk.sep }}</span></sc-for></div>
+              </sc-for>
+            </div>
+          </sc-if>
           <div data-facts-plain="true"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.FactList" items="{{ artist.facts }}" columns="{{ 3 }}" hint-size="100%,90px"></x-import></div>
         </div>
       </div>
@@ -389,6 +398,14 @@
               <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.Prose" hint-size="100%,80px">{{ lightboxWork.holding }}</x-import>
             </div>
           </sc-if>
+          <sc-if value="{{ lightboxWork.hasSources }}" hint-placeholder-val="{{ false }}">
+            <div data-sources="true" style="display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line-hairline);padding-top:var(--space-4);font-family:var(--font-ui);font-size:13px;line-height:1.5;color:var(--text-muted)">
+              <div style="font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--text-faint)">{{ L.srcHeading }}</div>
+              <sc-for list="{{ lightboxWork.sourceRows }}" as="row" hint-placeholder-count="1">
+                <div><span style="color:var(--text-faint)">{{ row.label }}: </span><sc-for list="{{ row.links }}" as="lk" hint-placeholder-count="1"><sc-if value="{{ lk.hasUrl }}" hint-placeholder-val="{{ true }}"><a href="{{ lk.url }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">{{ lk.text }}</a></sc-if><sc-if value="{{ lk.noUrl }}" hint-placeholder-val="{{ false }}"><span>{{ lk.text }}</span></sc-if><span>{{ lk.sep }}</span></sc-for></div>
+              </sc-for>
+            </div>
+          </sc-if>
           <sc-if value="{{ lightboxWork.noNotes }}" hint-placeholder-val="{{ false }}">
             <div style="font-family:var(--font-editorial);font-style:italic;font-size:var(--type-subtitle);color:var(--text-muted)">{{ L.noDescription }}</div>
           </sc-if>
@@ -518,7 +535,8 @@ const ARTISTS = [
     id: 'sydykhanov', name: 'Abdrashit Sydykhanov', years: '1937 — 2011', discipline: 'Oil',
     portrait: 'assets/portrait-sydykhanov.webp', fileLine: 'Archive file · Sydykhanov',
     lead: 'A painter of labour scenes rebuilt as pattern.',
-    bio: 'A pupil of Kenbayev and Galimbayeva at the Gogol art school (1965), Sydykhanov spent 25 years as a production designer at Kazakhfilm and made more than a thousand film sketches; he also painted a long series on Eastern parables. State Prize of the Kazakh SSR (1986). Gathering Tobacco dates from 1972. Biography source: Wikipedia.',
+    bio: 'A pupil of Kenbayev and Galimbayeva at the Gogol art school (1965), Sydykhanov spent 25 years as a production designer at Kazakhfilm and made more than a thousand film sketches; he also painted a long series on Eastern parables. State Prize of the Kazakh SSR (1986). Gathering Tobacco dates from 1972.',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Сыдыханов", "url": "https://ru.wikipedia.org/wiki/%D0%A1%D1%8B%D0%B4%D1%8B%D1%85%D0%B0%D0%BD%D0%BE%D0%B2,_%D0%90%D0%B1%D0%B4%D1%80%D0%B0%D1%88%D0%B8%D1%82_%D0%90%D1%80%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"}]}],
     facts: [ { label: 'Generation', value: 'The sixties' }, { label: 'In archive', value: '1 plate' } ]
   },
   {
@@ -606,27 +624,31 @@ const ARTISTS = [
     portrait: 'assets/portrait-tolepbay.webp', fileLine: 'Archive file · Tolepbay',
     lead: 'The painter who argued that Kazakh painting could be philosophy.',
     bio: 'Tolepbay is named as the artist who established the philosophical register of Kazakh painting in the 1970s and 1980s, and has gone on working through independence. His portrait of the writer Chinghiz Aitmatov is among his best-known canvases.',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Толепбай", "url": "https://ru.wikipedia.org/wiki/%D0%A2%D0%BE%D0%BB%D0%B5%D0%BF%D0%B1%D0%B0%D0%B9,_%D0%95%D1%80%D0%B1%D0%BE%D0%BB%D0%B0%D1%82_%D0%A2%D0%BE%D0%B3%D1%8B%D1%81%D0%B1%D0%B0%D0%B9%D1%83%D0%BB%D1%8B"}]}],
     facts: [ { label: 'Born', value: '1955' }, { label: 'In archive', value: '1 plate' } ]
   },
   {
     id: 'tansykbayev', name: 'Ural Tansykbayev', years: '1904 — 1974', discipline: 'Painting, stage design',
     portrait: 'assets/portrait-tansykbayev.webp', fileLine: 'Archive file · Tansykbayev',
     lead: 'The “Uzbek Gauguin” who painted nomads and designed the first Kazakh ballet.',
-    bio: 'Born in Tashkent to a Kazakh family, Tansykbayev studied in a Tashkent studio under N. Rozanov and at the Penza art school. Moscow museums and French post-impressionism shaped the radiant manner of early canvases such as Nomads (1931); from the 1950s landscape became his main genre. In 1938 he designed Kalkaman and Mamyr, the first Kazakh ballet, at the Alma-Ata opera. People’s Artist of the USSR (1963). Biography source: Wikipedia.',
+    bio: 'Born in Tashkent to a Kazakh family, Tansykbayev studied in a Tashkent studio under N. Rozanov and at the Penza art school. Moscow museums and French post-impressionism shaped the radiant manner of early canvases such as Nomads (1931); from the 1950s landscape became his main genre. In 1938 he designed Kalkaman and Mamyr, the first Kazakh ballet, at the Alma-Ata opera. People’s Artist of the USSR (1963).',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Тансыкбаев", "url": "https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%BD%D1%81%D1%8B%D0%BA%D0%B1%D0%B0%D0%B5%D0%B2,_%D0%A3%D1%80%D0%B0%D0%BB_%D0%A2%D0%B0%D0%BD%D1%81%D1%8B%D0%BA%D0%B1%D0%B0%D0%B5%D0%B2%D0%B8%D1%87"}]}, {"kind": "photo", "links": [{"text": "Public domain", "url": "https://commons.wikimedia.org/wiki/Commons:Licensing"}, {"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:O%CA%BBrol_Tansiqboyev.jpg"}]}],
     facts: []
   },
   {
     id: 'kapterev', name: 'Valery Kapterev', years: '1900 — 1981', discipline: 'Painting',
     portrait: 'assets/portrait-none.webp', fileLine: 'Archive file · Kapterev',
     lead: 'A Moscow modernist who walked the Alatau with botanists in 1928.',
-    bio: 'Kapterev graduated from VKhUTEMAS in 1925 and from the State Film Institute. He travelled with expeditions across Central Asia — to the Dzungarian and Zailiysky Alatau in 1928 and the Kazakh highlands in 1930 — and had a solo exhibition in Alma-Ata in 1943. Few of his pre-war paintings survive; some were destroyed as unfit for socialist realism. Biography source: Wikipedia.',
+    bio: 'Kapterev graduated from VKhUTEMAS in 1925 and from the State Film Institute. He travelled with expeditions across Central Asia — to the Dzungarian and Zailiysky Alatau in 1928 and the Kazakh highlands in 1930 — and had a solo exhibition in Alma-Ata in 1943. Few of his pre-war paintings survive; some were destroyed as unfit for socialist realism.',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Каптерев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%BF%D1%82%D0%B5%D1%80%D0%B5%D0%B2,_%D0%92%D0%B0%D0%BB%D0%B5%D1%80%D0%B8%D0%B9_%D0%92%D1%81%D0%B5%D0%B2%D0%BE%D0%BB%D0%BE%D0%B4%D0%BE%D0%B2%D0%B8%D1%87"}]}],
     facts: []
   },
   {
     id: 'tabiyev', name: 'Bakhtiyar Tabiyev', years: '1940 — 1999', discipline: 'Painting',
     portrait: 'assets/portrait-none.webp', fileLine: 'Archive file · Tabiyev',
     lead: 'An impressionist of the Aral shore who painted from nature, not from museums.',
-    bio: 'Born in Kulja to a Tatar family, Tabiyev moved to the USSR in 1955 and graduated with honours from the Frunze art school in 1961. He taught at the Gogol art school in Alma-Ata in 1967–1972 and joined the Artists’ Union in 1970; Honoured Art Worker of Kazakhstan (1988). Among his main works are In the Aral Region, Old Aul and Noon in the Steppe. Biography source: Wikipedia.',
+    bio: 'Born in Kulja to a Tatar family, Tabiyev moved to the USSR in 1955 and graduated with honours from the Frunze art school in 1961. He taught at the Gogol art school in Alma-Ata in 1967–1972 and joined the Artists’ Union in 1970; Honoured Art Worker of Kazakhstan (1988). Among his main works are In the Aral Region, Old Aul and Noon in the Steppe.',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Табиев", "url": "https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%B8%D0%B5%D0%B2,_%D0%91%D0%B0%D1%85%D1%82%D0%B8%D1%8F%D1%80_%D0%A5%D0%B0%D1%81%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"}]}],
     facts: []
   },
   {
@@ -640,14 +662,16 @@ const ARTISTS = [
     id: 'nurmukhamedov', name: 'Nagim-Bek Nurmukhamedov', years: '1924 — 1986', discipline: 'Painting, art history',
     portrait: 'assets/portrait-nurmukhamedov.webp', fileLine: 'Archive file · Nurmukhamedov',
     lead: 'A front-line veteran and art historian who painted admirals from life and the Turgai steppe from memory.',
-    bio: 'Raised in an orphanage, Nurmukhamedov studied at the Alma-Ata art school and fought in the battle for the Caucasus; after the war he trained at the Repin Institute in Leningrad under R. Frentz and in A. Gerasimov’s studio. From 1959 he lived in Alma-Ata, painting genre scenes, portraits and history (Turgai Steppes. 1919) and writing on the art of Kazakhstan. People’s Artist of the Kazakh SSR (1974). Biography source: Wikipedia. Portrait: A.Muneca, CC BY-SA 3.0, Wikimedia Commons.',
+    bio: 'Raised in an orphanage, Nurmukhamedov studied at the Alma-Ata art school and fought in the battle for the Caucasus; after the war he trained at the Repin Institute in Leningrad under R. Frentz and in A. Gerasimov’s studio. From 1959 he lived in Alma-Ata, painting genre scenes, portraits and history (Turgai Steppes. 1919) and writing on the art of Kazakhstan. People’s Artist of the Kazakh SSR (1974).',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Нурмухаммедов", "url": "https://ru.wikipedia.org/wiki/%D0%9D%D1%83%D1%80%D0%BC%D1%83%D1%85%D0%B0%D0%BC%D0%BC%D0%B5%D0%B4%D0%BE%D0%B2,_%D0%9D%D0%B0%D0%B3%D0%B8%D0%BC-%D0%91%D0%B5%D0%BA_%D0%94%D0%B6%D0%B5%D0%BB%D0%B0%D0%BB%D1%8C-%D1%8D%D0%B4-%D0%94%D0%B8%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"}]}, {"kind": "photo", "links": [{"text": "A.Muneca", "url": "https://commons.wikimedia.org/wiki/User:A.Muneca"}, {"text": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/"}, {"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nurmukhammedov_Nagim-Bek_1970.jpg"}]}],
     facts: []
   },
   {
     id: 'azhiev', name: 'Uke Azhiev', years: '1924 — 2015', discipline: 'Watercolour',
     portrait: 'assets/portrait-azhiev.webp', fileLine: 'Archive file · Azhiev',
     lead: 'A master of watercolour said to have made some ten thousand works.',
-    bio: 'Azhiev studied at the Alma-Ata art school and, from 1939, at the Leningrad school of the Academy of Arts; he fought in the defence of Leningrad and finished his studies in Alma-Ata in 1950. He painted portraits, landscapes and journeys in watercolour — Portrait of A. Kasteyev, Chokan Valikhanov’s Journey (1959) — and taught at the Alma-Ata art school. Honoured Art Worker of the Kazakh SSR (1985). Biography source: Wikipedia. Portrait: Zhahan72, CC BY-SA 4.0, Wikimedia Commons.',
+    bio: 'Azhiev studied at the Alma-Ata art school and, from 1939, at the Leningrad school of the Academy of Arts; he fought in the defence of Leningrad and finished his studies in Alma-Ata in 1950. He painted portraits, landscapes and journeys in watercolour — Portrait of A. Kasteyev, Chokan Valikhanov’s Journey (1959) — and taught at the Alma-Ata art school. Honoured Art Worker of the Kazakh SSR (1985).',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Ажиев", "url": "https://ru.wikipedia.org/wiki/%D0%90%D0%B6%D0%B8%D0%B5%D0%B2,_%D0%A3%D0%BA%D0%B8_%D0%90%D0%B6%D0%B8%D0%B5%D0%B2%D0%B8%D1%87"}]}, {"kind": "photo", "links": [{"text": "Zhahan72", "url": "https://commons.wikimedia.org/wiki/User:Zhahan72"}, {"text": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/"}, {"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:%D0%A3%D0%BA%D0%B5_%D0%90%D0%B6%D0%B8%D0%B5%D0%B2_1.jpg"}]}],
     facts: []
   },
   {
@@ -668,7 +692,8 @@ const ARTISTS = [
     id: 'aliyev', name: 'Dulat Aliyev', years: 'Born 1948', discipline: 'Painting',
     portrait: 'assets/portrait-none.webp', fileLine: 'Archive file · Aliyev',
     lead: 'The painter of fellow citizens: kitchens, dormitories, crowded streets.',
-    bio: 'Aliyev graduated from the Repin Institute in Leningrad in 1977 and taught at the Alma-Ata art school and the republican art college. His known works include Tea in the Dormitory (1969), The Fall of Otrar (1980), Kitchen (1981) and The Last Supper (1990); his cycle about fellow citizens won the State Prize of Kazakhstan in 1989. Biography source: Wikipedia.',
+    bio: 'Aliyev graduated from the Repin Institute in Leningrad in 1977 and taught at the Alma-Ata art school and the republican art college. His known works include Tea in the Dormitory (1969), The Fall of Otrar (1980), Kitchen (1981) and The Last Supper (1990); his cycle about fellow citizens won the State Prize of Kazakhstan in 1989.',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Алиев", "url": "https://ru.wikipedia.org/wiki/%D0%90%D0%BB%D0%B8%D0%B5%D0%B2,_%D0%94%D1%83%D0%BB%D0%B0%D1%82_%D0%9A%D0%B0%D0%BF%D0%BF%D0%B0%D1%80%D0%BE%D0%B2%D0%B8%D1%87"}]}],
     facts: []
   },
   {
@@ -682,7 +707,8 @@ const ARTISTS = [
     id: 'abuov', name: 'Tursyn Abuov', years: 'Born 1936', discipline: 'Painting',
     portrait: 'assets/portrait-none.webp', fileLine: 'Archive file · Abuov',
     lead: 'A colourist of complex compositions and strong national colour.',
-    bio: 'Born in Taldybulak in the Almaty region, Abuov graduated from the Gogol art school in Alma-Ata and, in 1976, from the Abai Pedagogical Institute. He painted triptychs on the Virgin Lands and on the 70th anniversary of Kazakhstan, and portraits including the pilot T. Begeldinov. Honoured Art Worker of Kazakhstan (1998). Biography source: Wikipedia.',
+    bio: 'Born in Taldybulak in the Almaty region, Abuov graduated from the Gogol art school in Alma-Ata and, in 1976, from the Abai Pedagogical Institute. He painted triptychs on the Virgin Lands and on the 70th anniversary of Kazakhstan, and portraits including the pilot T. Begeldinov. Honoured Art Worker of Kazakhstan (1998).',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Абуов", "url": "https://ru.wikipedia.org/wiki/%D0%90%D0%B1%D1%83%D0%BE%D0%B2,_%D0%A2%D1%83%D1%80%D1%81%D1%8B%D0%BD"}]}],
     facts: []
   },
   {
@@ -696,7 +722,8 @@ const ARTISTS = [
     id: 'kairambaev', name: 'Zhumakyn Kairambaev', years: 'Born 1953', discipline: 'Painting, sculpture',
     portrait: 'assets/portrait-none.webp', fileLine: 'Archive file · Kairambaev',
     lead: 'A painter and sculptor who joins the national world-view to contemporary form.',
-    bio: 'Born in Kulja, Kairambaev studied at the Alma-Ata art school (1970–1975) and at the Repin Institute in Leningrad under E. Moiseyenko (1975–1981). Since 1981 he has taught painting at the Zhurgenov Academy of Arts in Almaty. Honoured Worker of Kazakhstan (2013). Biography source: Wikipedia.',
+    bio: 'Born in Kulja, Kairambaev studied at the Alma-Ata art school (1970–1975) and at the Repin Institute in Leningrad under E. Moiseyenko (1975–1981). Since 1981 he has taught painting at the Zhurgenov Academy of Arts in Almaty. Honoured Worker of Kazakhstan (2013).',
+    sources: [{"kind": "bio", "links": [{"text": "Википедия: Кайрамбаев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B9%D1%80%D0%B0%D0%BC%D0%B1%D0%B0%D0%B5%D0%B2,_%D0%96%D1%83%D0%BC%D0%B0%D0%BA%D1%8B%D0%BD_%D0%9A%D0%BE%D0%B6%D0%B0%D0%BA%D1%8B%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"}]}],
     facts: []
   },
   {
@@ -802,22 +829,22 @@ const WORKS = [
   { id: 'w-kasteyev-03', title: 'Assy', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-03.webp', thumb: 'assets/works/t/w-kasteyev-03.webp', decade: 1950 },
   { id: 'w-kasteyev-04', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-04.webp', thumb: 'assets/works/t/w-kasteyev-04.webp', decade: 1950 },
   { id: 'w-kasteyev-05', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-05.webp', thumb: 'assets/works/t/w-kasteyev-05.webp', decade: 1950 },
-  { id: 'w-kasteyev-06', title: 'Kapchagay Hydroelectric Station', year: '1972', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-06.webp', thumb: 'assets/works/t/w-kasteyev-06.webp', decade: 1970 },
-  { id: 'w-kasteyev-07', title: 'Aksai Quarry', year: '1967', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-07.webp', thumb: 'assets/works/t/w-kasteyev-07.webp', decade: 1960 },
+  { id: 'w-kasteyev-06', title: 'Kapchagay Hydroelectric Station', year: '1972', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-06.webp', thumb: 'assets/works/t/w-kasteyev-06.webp', decade: 1970, sources: [{"kind": "title", "links": [{"text": "Википедия: Кастеев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%B5%D0%B2,_%D0%90%D0%B1%D1%8B%D0%BB%D1%85%D0%B0%D0%BD"}]}] },
+  { id: 'w-kasteyev-07', title: 'Aksai Quarry', year: '1967', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-07.webp', thumb: 'assets/works/t/w-kasteyev-07.webp', decade: 1960, sources: [{"kind": "title", "links": [{"text": "Википедия: Кастеев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%B5%D0%B2,_%D0%90%D0%B1%D1%8B%D0%BB%D1%85%D0%B0%D0%BD"}]}] },
   { id: 'w-kasteyev-08', title: 'Chokan Valikhanov', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-08.webp', thumb: 'assets/works/t/w-kasteyev-08.webp', decade: 1950 },
   { id: 'w-kasteyev-09', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-09.webp', thumb: 'assets/works/t/w-kasteyev-09.webp', decade: 1950 },
-  { id: 'w-kasteyev-10', title: 'Cotton Harvest', year: '1935', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-10.webp', thumb: 'assets/works/t/w-kasteyev-10.webp', decade: 1930 },
+  { id: 'w-kasteyev-10', title: 'Cotton Harvest', year: '1935', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-10.webp', thumb: 'assets/works/t/w-kasteyev-10.webp', decade: 1930, sources: [{"kind": "title", "links": [{"text": "Википедия: Кастеев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%B5%D0%B2,_%D0%90%D0%B1%D1%8B%D0%BB%D1%85%D0%B0%D0%BD"}]}] },
   { id: 'w-kasteyev-11', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-11.webp', thumb: 'assets/works/t/w-kasteyev-11.webp', decade: 1950 },
   { id: 'w-kasteyev-12', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-12.webp', thumb: 'assets/works/t/w-kasteyev-12.webp', decade: 1950 },
-  { id: 'w-kasteyev-13', title: 'Milking the Mares', year: '1936', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-13.webp', thumb: 'assets/works/t/w-kasteyev-13.webp', decade: 1930 },
+  { id: 'w-kasteyev-13', title: 'Milking the Mares', year: '1936', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-13.webp', thumb: 'assets/works/t/w-kasteyev-13.webp', decade: 1930, sources: [{"kind": "title", "links": [{"text": "Википедия: Кастеев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%B5%D0%B2,_%D0%90%D0%B1%D1%8B%D0%BB%D1%85%D0%B0%D0%BD"}]}] },
   { id: 'w-kasteyev-14', title: 'Self-Portrait', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-14.webp', thumb: 'assets/works/t/w-kasteyev-14.webp', decade: 1950 },
   { id: 'w-kasteyev-15', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-15.webp', thumb: 'assets/works/t/w-kasteyev-15.webp', decade: 1950 },
   { id: 'w-kasteyev-16', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-16.webp', thumb: 'assets/works/t/w-kasteyev-16.webp', decade: 1950 },
   { id: 'w-kasteyev-17', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-17.webp', thumb: 'assets/works/t/w-kasteyev-17.webp', decade: 1950 },
   { id: 'w-kasteyev-18', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-18.webp', thumb: 'assets/works/t/w-kasteyev-18.webp', decade: 1950 },
-  { id: 'w-kasteyev-19', title: 'Collective-Farm Toi', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-19.webp', thumb: 'assets/works/t/w-kasteyev-19.webp', decade: 1950 },
+  { id: 'w-kasteyev-19', title: 'Collective-Farm Toi', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-19.webp', thumb: 'assets/works/t/w-kasteyev-19.webp', decade: 1950, sources: [{"kind": "title", "links": [{"text": "Википедия: Кастеев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%B5%D0%B2,_%D0%90%D0%B1%D1%8B%D0%BB%D1%85%D0%B0%D0%BD"}]}] },
   { id: 'w-kasteyev-20', title: 'Untitled', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-20.webp', thumb: 'assets/works/t/w-kasteyev-20.webp', decade: 1950 },
-  { id: 'w-kasteyev-21', title: 'Collective-Farm Dairy', year: '1936', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-21.webp', thumb: 'assets/works/t/w-kasteyev-21.webp', decade: 1930 },
+  { id: 'w-kasteyev-21', title: 'Collective-Farm Dairy', year: '1936', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-21.webp', thumb: 'assets/works/t/w-kasteyev-21.webp', decade: 1930, sources: [{"kind": "title", "links": [{"text": "Википедия: Кастеев", "url": "https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D1%81%D1%82%D0%B5%D0%B5%D0%B2,_%D0%90%D0%B1%D1%8B%D0%BB%D1%85%D0%B0%D0%BD"}]}] },
   { id: 'w-kasteyev-22', title: 'Kumis Farm', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-22.webp', thumb: 'assets/works/t/w-kasteyev-22.webp', decade: 1950 },
   { id: 'w-kasteyev-23', title: 'Hunter with a Golden Eagle', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-23.webp', thumb: 'assets/works/t/w-kasteyev-23.webp', decade: 1950 },
   { id: 'w-kasteyev-24', title: 'In the Yurt', year: 'Undated', artistId: 'kasteyev', medium: 'Medium not recorded', src: 'assets/works/w-kasteyev-24.webp', thumb: 'assets/works/t/w-kasteyev-24.webp', decade: 1950 },
@@ -947,23 +974,23 @@ const WORKS = [
   { id: 'w-khludov-01', title: 'Untitled', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-01.webp', thumb: 'assets/works/t/w-khludov-01.webp', decade: 1910 },
   { id: 'w-khludov-02', title: 'Untitled', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-02.webp', thumb: 'assets/works/t/w-khludov-02.webp', decade: 1910 },
   { id: 'w-khludov-03', title: 'Untitled', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-03.webp', thumb: 'assets/works/t/w-khludov-03.webp', decade: 1910 },
-  { id: 'w-khludov-04', title: 'Self-Portrait', year: '1921', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-04.webp', thumb: 'assets/works/t/w-khludov-04.webp', decade: 1920 },
-  { id: 'w-khludov-05', title: 'Barymta at Night', year: '1887', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-05.webp', thumb: 'assets/works/t/w-khludov-05.webp', decade: 1910 },
-  { id: 'w-khludov-06', title: 'Beating Wool', year: '1889', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-06.webp', thumb: 'assets/works/t/w-khludov-06.webp', decade: 1910 },
-  { id: 'w-khludov-07', title: 'Mother Nursing a Child', year: '1907', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-07.webp', thumb: 'assets/works/t/w-khludov-07.webp', decade: 1910 },
-  { id: 'w-khludov-08', title: 'Young Shepherd in the Steppe', year: '1910', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-08.webp', thumb: 'assets/works/t/w-khludov-08.webp', decade: 1910 },
-  { id: 'w-khludov-09', title: 'Young Hunters', year: '1913', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-09.webp', thumb: 'assets/works/t/w-khludov-09.webp', decade: 1910 },
-  { id: 'w-khludov-10', title: 'Rich Nomads', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-10.webp', thumb: 'assets/works/t/w-khludov-10.webp', decade: 1910 },
-  { id: 'w-khludov-11', title: 'The Irrigator', year: '1913', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-11.webp', thumb: 'assets/works/t/w-khludov-11.webp', decade: 1910 },
-  { id: 'w-khludov-12', title: 'Boy on a Bull', year: '1907', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-12.webp', thumb: 'assets/works/t/w-khludov-12.webp', decade: 1910 },
+  { id: 'w-khludov-04', title: 'Self-Portrait', year: '1921', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-04.webp', thumb: 'assets/works/t/w-khludov-04.webp', decade: 1920, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_The_Self-Portrait_(1921).jpg"}]}] },
+  { id: 'w-khludov-05', title: 'Barymta at Night', year: '1887', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-05.webp', thumb: 'assets/works/t/w-khludov-05.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Barymta_at_Night_(1887).jpg"}]}] },
+  { id: 'w-khludov-06', title: 'Beating Wool', year: '1889', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-06.webp', thumb: 'assets/works/t/w-khludov-06.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Wool_Beating_(1889).jpg"}]}] },
+  { id: 'w-khludov-07', title: 'Mother Nursing a Child', year: '1907', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-07.webp', thumb: 'assets/works/t/w-khludov-07.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Mother_Breastfeeding_Baby_(1907).jpg"}]}] },
+  { id: 'w-khludov-08', title: 'Young Shepherd in the Steppe', year: '1910', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-08.webp', thumb: 'assets/works/t/w-khludov-08.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Young_Shepherd_in_the_Steppe_(1910).jpg"}]}] },
+  { id: 'w-khludov-09', title: 'Young Hunters', year: '1913', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-09.webp', thumb: 'assets/works/t/w-khludov-09.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Young_Hunters_(1913).jpg"}]}] },
+  { id: 'w-khludov-10', title: 'Rich Nomads', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-10.webp', thumb: 'assets/works/t/w-khludov-10.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Rich_Nomads_(mid-1880s).jpg"}]}] },
+  { id: 'w-khludov-11', title: 'The Irrigator', year: '1913', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-11.webp', thumb: 'assets/works/t/w-khludov-11.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:Nikolay_Khludov_%E2%80%94_Arable_Waterer_(1913).jpg"}]}] },
+  { id: 'w-khludov-12', title: 'Boy on a Bull', year: '1907', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-12.webp', thumb: 'assets/works/t/w-khludov-12.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:%D0%A5%D0%BB%D1%83%D0%B4%D0%BE%D0%B2_%D0%9D._%D0%93.,_%D0%9C%D0%B0%D0%BB%D1%8C%D1%87%D0%B8%D0%BA_%D0%BD%D0%B0_%D0%B1%D1%8B%D0%BA%D0%B5_(1907).jpg"}, {"text": "100 шедевров искусства Казахстана. Алматы: Жибек жолы, 2013, с. 12"}]}] },
   { id: 'w-khludov-13', title: 'Untitled', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-13.webp', thumb: 'assets/works/t/w-khludov-13.webp', decade: 1910 },
   { id: 'w-khludov-14', title: 'Untitled', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-14.webp', thumb: 'assets/works/t/w-khludov-14.webp', decade: 1910 },
   { id: 'w-khludov-15', title: 'Untitled', year: 'Undated', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-15.webp', thumb: 'assets/works/t/w-khludov-15.webp', decade: 1910 },
-  { id: 'w-khludov-16', title: 'In the Yurt', year: '1891', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-16.webp', thumb: 'assets/works/t/w-khludov-16.webp', decade: 1910 },
+  { id: 'w-khludov-16', title: 'In the Yurt', year: '1891', artistId: 'khludov', medium: 'Medium not recorded', src: 'assets/works/w-khludov-16.webp', thumb: 'assets/works/t/w-khludov-16.webp', decade: 1910, sources: [{"kind": "title", "links": [{"text": "Wikimedia Commons", "url": "https://commons.wikimedia.org/wiki/File:%D0%A5%D0%BB%D1%83%D0%B4%D0%BE%D0%B2_%D0%9D._%D0%93.,_%D0%92_%D1%8E%D1%80%D1%82%D0%B5_(1891).jpg"}]}] },
   { id: 'w-tansykbayev-03', title: 'Untitled', year: 'Undated', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-03.webp', thumb: 'assets/works/t/w-tansykbayev-03.webp', decade: 1930 },
   { id: 'w-tansykbayev-04', title: 'Untitled', year: 'Undated', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-04.webp', thumb: 'assets/works/t/w-tansykbayev-04.webp', decade: 1930 },
-  { id: 'w-tansykbayev-05', title: 'Nomads', year: '1931', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-05.webp', thumb: 'assets/works/t/w-tansykbayev-05.webp', decade: 1930 },
-  { id: 'w-tansykbayev-06', title: 'Crimson Autumn', year: '1931', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-06.webp', thumb: 'assets/works/t/w-tansykbayev-06.webp', decade: 1930 },
+  { id: 'w-tansykbayev-05', title: 'Nomads', year: '1931', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-05.webp', thumb: 'assets/works/t/w-tansykbayev-05.webp', decade: 1930, sources: [{"kind": "title", "links": [{"text": "100 шедевров искусства Казахстана. Алматы: Жибек жолы, 2013, с. 21"}, {"text": "Википедия: Тансыкбаев", "url": "https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%BD%D1%81%D1%8B%D0%BA%D0%B1%D0%B0%D0%B5%D0%B2,_%D0%A3%D1%80%D0%B0%D0%BB_%D0%A2%D0%B0%D0%BD%D1%81%D1%8B%D0%BA%D0%B1%D0%B0%D0%B5%D0%B2%D0%B8%D1%87"}]}] },
+  { id: 'w-tansykbayev-06', title: 'Crimson Autumn', year: '1931', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-06.webp', thumb: 'assets/works/t/w-tansykbayev-06.webp', decade: 1930, sources: [{"kind": "title", "links": [{"text": "100 шедевров искусства Казахстана. Алматы: Жибек жолы, 2013, с. 19"}]}] },
   { id: 'w-tansykbayev-07', title: 'Apple Picking', year: 'Undated', artistId: 'tansykbayev', medium: 'Medium not recorded', src: 'assets/works/w-tansykbayev-07.webp', thumb: 'assets/works/t/w-tansykbayev-07.webp', decade: 1930 },
   { id: 'w-mambeyev-01', title: 'Untitled', year: 'Undated', artistId: 'mambeyev', medium: 'Medium not recorded', src: 'assets/works/w-mambeyev-01.webp', thumb: 'assets/works/t/w-mambeyev-01.webp', decade: 1960 },
   { id: 'w-mambeyev-02', title: 'Untitled', year: 'Undated', artistId: 'mambeyev', medium: 'Medium not recorded', src: 'assets/works/w-mambeyev-02.webp', thumb: 'assets/works/t/w-mambeyev-02.webp', decade: 1960 },
@@ -1137,6 +1164,7 @@ const OFFSETS = [0, 16, 48, 72];
 const LANGS = [{ id: 'en', label: 'EN' }, { id: 'kk', label: 'ҚАЗ' }, { id: 'ru', label: 'РУС' }];
 
 const UI_EN = {
+  srcHeading: "Sources", srcBio: "Biography", srcPhoto: "Portrait photo", srcTitle: "Title and date", sourcesNote: "Sources: artists’ biographies are retold from Wikipedia; free-licence portraits and Khludov’s titles come from Wikimedia Commons; some titles and dates are checked against the book 100 Masterpieces of the Art of Kazakhstan (2013). A work whose title or date cannot be confirmed is listed as Untitled or Undated. Links are given in each artist’s file and under each work.",
   eyebrow: 'A digital archive of Kazakh painting',
   tagline: 'A century of Almaty read across the easel — one decade at a time, the city in black and white, the canvases in full colour.',
   scrollToRead: 'Scroll to read',
@@ -1329,6 +1357,14 @@ class Component extends DCLogic {
     document.documentElement.lang = id;
     document.title = titles[id] || titles.en;
   }
+  srcRows(list) {
+    const U = Object.assign({}, UI_EN, (this._T && this._T.ui) || {});
+    const labels = { bio: U.srcBio, photo: U.srcPhoto, title: U.srcTitle };
+    return (list || []).map((r, i) => ({
+      key: 'src-' + i, label: labels[r.kind] || '',
+      links: r.links.map((l, j) => ({ key: 'l-' + j, text: l.text, url: l.url || '', hasUrl: !!l.url, noUrl: !l.url, sep: j < r.links.length - 1 ? ' · ' : '' }))
+    }));
+  }
   tw(id) { return ((this._T && this._T.works) || {})[id] || {}; }
   ta(id) { return ((this._T && this._T.artists) || {})[id] || {}; }
 
@@ -1347,6 +1383,8 @@ class Component extends DCLogic {
         ...this.tw(w.id),
         medium: med,
         thumb: w.thumb || w.src,
+        sourceRows: this.srcRows(w.sources),
+        hasSources: !!(w.sources && w.sources.length),
         artist: artistName,
         offset: OFFSETS[i % OFFSETS.length],
         year: /^\d{4}$/.test(w.year) ? w.year : (((this._T && this._T.ui && this._T.ui.undated) || UI_EN.undated)),
@@ -1437,6 +1475,8 @@ class Component extends DCLogic {
         hasTimeline: !!(a.timeline && a.timeline.length),
         hasStyle: !!a.style, hasQuote: !!a.quote, hasContext: !!a.context,
         hasDetail: !!(a.style || a.quote || a.context || (a.timeline && a.timeline.length)),
+        sourceRows: this.srcRows(a.sources),
+        hasSources: !!(a.sources && a.sources.length),
         works: this.decorate(WORKS.filter(w => w.artistId === a.id)),
         slots: (() => {
           const n = WORKS.filter(w => w.artistId === a.id).length;
