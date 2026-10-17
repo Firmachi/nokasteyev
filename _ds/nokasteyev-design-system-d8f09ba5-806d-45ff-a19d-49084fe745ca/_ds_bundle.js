@@ -250,7 +250,7 @@ function Icon({
   style,
   ...rest
 }) {
-  const src = `https://unpkg.com/lucide-static@0.417.0/icons/${name}.svg`;
+  const src = `/vendor/lucide/${name}.svg`;
   return /*#__PURE__*/React.createElement("span", _extends({
     "aria-hidden": "true",
     style: {
