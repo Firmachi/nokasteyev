@@ -253,4 +253,9 @@
     <image:image><image:loc>https://nokasteyev.art/assets/works/w-shkolny-09.webp</image:loc><image:title>Ushkonyr — Ariy Shkolny</image:title></image:image>
     <image:image><image:loc>https://nokasteyev.art/assets/works/w-shkolny-10.webp</image:loc><image:title>Charyn — Ariy Shkolny</image:title></image:image>
   </url>
+  <url>
+    <loc>https://nokasteyev.art/karta</loc>
+    <lastmod>2026-10-17</lastmod>
+    <image:image><image:loc>https://nokasteyev.art/assets/verny-1912.jpg</image:loc><image:title>План города Верного, 1912</image:title></image:image>
+  </url>
 </urlset>

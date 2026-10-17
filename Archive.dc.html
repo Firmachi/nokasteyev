@@ -145,6 +145,7 @@
 </div>
 
 <div data-on-archive="true" style="position:fixed;top:0;right:var(--gutter-page);height:var(--rail-header);z-index:101;display:flex;align-items:center;gap:var(--space-5)">
+  <a href="/karta" style="font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-1);text-decoration:none;padding-right:var(--space-5);border-right:1px solid var(--line-on-archive)">{{ L.mapLink }}</a>
   <div style="display:flex;align-items:center;gap:var(--space-4)">
     <sc-for list="{{ langs }}" as="lang" hint-placeholder-count="3">
       <button onClick="{{ lang.go }}" style="{{ lang.style }}">{{ lang.label }}</button>
@@ -1170,6 +1171,7 @@ const OFFSETS = [0, 16, 48, 72];
 const LANGS = [{ id: 'en', label: 'EN' }, { id: 'kk', label: 'ҚАЗ' }, { id: 'ru', label: 'РУС' }];
 
 const UI_EN = {
+  mapLink: 'Map',
   prevPainters: 'Previous painters', nextPainters: 'More painters',
   srcHeading: "Sources", srcBio: "Biography", srcPhoto: "Portrait photo", srcTitle: "Title and date", sourcesNote: "Sources: artists’ biographies are retold from Wikipedia; free-licence portraits and Khludov’s titles come from Wikimedia Commons; some titles and dates are checked against the book 100 Masterpieces of the Art of Kazakhstan (2013). A work whose title or date cannot be confirmed is listed as Untitled or Undated. Links are given in each artist’s file and under each work.",
   eyebrow: 'A digital archive of Kazakh painting',

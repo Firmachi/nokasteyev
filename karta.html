@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карта мест — noKasteyev</title>
+<meta name="description" content="Где стоял мольберт: Медео, Иссык, Кольсай, Чарын и другие места Алматы и окрестностей, которые казахские художники вписали в названия картин. План Верного 1912 года.">
+<link rel="canonical" href="https://nokasteyev.art/karta">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="noKasteyev">
+<meta property="og:url" content="https://nokasteyev.art/karta">
+<meta property="og:title" content="Карта мест — noKasteyev">
+<meta property="og:description" content="Медео, Иссык, Кольсай, Чарын — места, которые художники вписали в названия своих картин.">
+<meta property="og:image" content="https://nokasteyev.art/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/colors.css">
+<link rel="stylesheet" href="_ds/nokasteyev-design-system-d8f09ba5-806d-45ff-a19d-49084fe745ca/tokens/typography.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root { --bg:#14120F; --panel:#1c1915; --paper:#F3EFE7; --paper-dim:#DED6C8; --faint:#9A9184; --line:rgba(243,239,231,.16); --accent:#A2503A; --ochre:#B8862F; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--paper); font-family:var(--font-ui, Arial, sans-serif); }
+  .screen { display:grid; grid-template-columns:minmax(300px, 34%) 1fr; height:100vh; }
+  aside { padding:32px clamp(20px,3vw,48px); display:flex; flex-direction:column; gap:22px; overflow:auto; border-right:1px solid var(--line); scrollbar-width:none; }
+  aside > * { flex-shrink:0; }
+  .back { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint); text-decoration:none; }
+  .back:hover { color:var(--paper); }
+  .eyebrow { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint); }
+  h1 { margin:0; font-family:var(--font-display); font-weight:400; font-size:clamp(40px,6vh,72px); line-height:.95; letter-spacing:-.01em; }
+  h1 i { color:var(--faint); }
+  .lead { margin:0; font-family:var(--font-editorial); font-style:italic; font-size:clamp(17px,2.2vh,21px); line-height:1.45; color:var(--paper-dim); }
+  .toggle { display:flex; border:1px solid var(--line); }
+  .toggle button { flex:1; background:none; border:0; color:var(--faint); padding:10px 12px; font:inherit; font-size:11px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; }
+  .toggle button.on { background:var(--paper); color:var(--bg); }
+  .card { border-top:1px solid var(--line); padding-top:18px; display:flex; flex-direction:column; gap:12px; min-height:260px; }
+  .card img { width:100%; max-height:34vh; object-fit:contain; background:#0d0c0a; display:block; }
+  .card h2 { margin:0; font-family:var(--font-editorial); font-style:italic; font-weight:400; font-size:24px; line-height:1.15; }
+  .card .by { font-family:var(--font-display); font-size:17px; }
+  .card .meta { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+  .card .place { font-size:13px; color:var(--paper-dim); line-height:1.5; }
+  .card .empty { font-family:var(--font-editorial); font-style:italic; color:var(--faint); font-size:18px; line-height:1.45; }
+  .pager { display:flex; gap:8px; }
+  .pager button { background:none; border:1px solid var(--line); color:var(--paper); width:34px; height:34px; cursor:pointer; font-size:15px; }
+  ol.places { list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+  ol.places li { display:flex; gap:12px; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--line); cursor:pointer; font-size:14px; color:var(--paper-dim); }
+  ol.places li b { font-family:var(--font-display); font-weight:400; color:var(--faint); width:20px; flex:0 0 auto; }
+  ol.places li span.n { margin-left:auto; font-size:11px; color:var(--faint); }
+  ol.places li.on, ol.places li:hover { color:var(--paper); }
+  ol.places li.on b { color:var(--accent); }
+  .note { font-size:11px; line-height:1.6; color:var(--faint); margin-top:auto; }
+  .note a { color:inherit; }
+  main { position:relative; background:#e7e0d2; }
+  #map, #plan { position:absolute; inset:0; }
+  #plan { display:none; overflow:auto; background:#efe7d6; cursor:grab; }
+  #plan img { display:block; width:max(100%, 1180px); height:auto; mix-blend-mode:multiply; }
+  .leaflet-tile-pane { filter:grayscale(1) sepia(.5) contrast(.92) brightness(1.03); }
+  .leaflet-container { background:#e7e0d2; font-family:var(--font-ui); }
+  .pin { width:28px; height:28px; border-radius:50%; background:var(--accent); color:var(--paper); border:2px solid var(--paper); display:flex; align-items:center; justify-content:center; font:500 12px var(--font-ui); box-shadow:0 2px 8px rgba(20,18,15,.35); transition:transform .2s; }
+  .pin.approx { background:var(--ochre); }
+  .pin.on { transform:scale(1.35); background:var(--bg); }
+  .leaflet-tooltip.lbl { background:var(--paper); color:var(--bg); border:0; border-radius:0; box-shadow:none; font:13px var(--font-editorial); font-style:italic; padding:2px 7px; }
+  .leaflet-tooltip.lbl::before { display:none; }
+  .legend { position:absolute; right:16px; bottom:28px; z-index:500; background:rgba(243,239,231,.92); color:var(--bg); padding:10px 12px; font-size:12px; line-height:1.7; }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; vertical-align:-1px; }
+  .stamp { position:absolute; left:16px; top:16px; z-index:500; background:var(--bg); color:var(--paper); padding:6px 10px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; }
+  @media (max-width:820px) { .screen { grid-template-columns:1fr; grid-template-rows:auto 60vh; height:auto; } aside { border-right:0; } main { height:60vh; } }
+</style>
+</head>
+<body>
+<div class="screen">
+  <aside>
+    <a class="back" href="/">← Галерея noKasteyev</a>
+    <h1><i>Карта</i><br>мест</h1>
+    <p class="lead">Где стоял мольберт: Медео, Иссык, Кольсай, Чарын — места, которые художники вписали в названия своих картин.</p>
+    <div class="toggle" role="tablist">
+      <button class="on" data-mode="map">Окрестности</button>
+      <button data-mode="plan">План Верного, 1912</button>
+    </div>
+    <div class="card" id="card"></div>
+    <ol class="places" id="list"></ol>
+    <div class="note">
+      Точки ставятся по названию картины. <span style="color:var(--ochre)">●</span> — место известно примерно.<br>
+      План: «План гор. Верного», сост. Поповым, 1912 — общественное достояние, <a href="https://commons.wikimedia.org/wiki/File:Almaty_1912.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.<br>
+      Подложка: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">участники OpenStreetMap</a>.
+    </div>
+  </aside>
+  <main>
+    <div id="map"></div>
+    <div id="plan"><img src="assets/verny-1912.jpg" alt="План города Верного, 1912"></div>
+    <div class="stamp" id="stamp">Алматы и окрестности · сегодня</div>
+    <div class="legend" id="legend"><i style="background:#A2503A"></i>место из названия картины<br><i style="background:#B8862F"></i>место известно примерно</div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const A = 'assets/';
+const PLACES = [
+  { name:'Медео', ll:[43.1577, 77.0590], works:[
+    { t:'Медеу', by:'Абылхан Кастеев', y:'1967', img:'work-medeo.webp' },
+    { t:'Медео', by:'Жанатай Шарденов', y:'1992', img:'works/t/w-shardenov-06.webp' } ] },
+  { name:'Алма-Ата, новостройки', ll:[43.2380, 76.9450], approx:true, works:[
+    { t:'Новостройки', by:'Али Джусупов', y:'1964', img:'works/t/w-dzhusupov-17.webp' } ] },
+  { name:'Аксай', ll:[43.1450, 76.8300], approx:true, works:[
+    { t:'Аксайский карьер', by:'Абылхан Кастеев', y:'1967', img:'works/t/w-kasteyev-07.webp' } ] },
+  { name:'Ушконыр', ll:[43.0700, 76.7800], approx:true, works:[
+    { t:'Ушконыр', by:'Арий Школьный', y:'', img:'works/t/w-shkolny-09.webp' } ] },
+  { name:'Талгарский район', ll:[43.3030, 77.2400], approx:true, works:[
+    { t:'Совхоз «Алатау», Талгарский район', by:'Аубакир Исмаилов', y:'', img:'work-ai-alatau.webp' } ] },
+  { name:'Озеро Иссык', ll:[43.2556, 77.4825], works:[
+    { t:'Иссык в дождливый день', by:'Али Джусупов', y:'', img:'works/t/w-dzhusupov-15.webp' } ] },
+  { name:'Плато Ассы', ll:[43.2300, 77.8800], approx:true, works:[
+    { t:'Ассы', by:'Абылхан Кастеев', y:'', img:'works/t/w-kasteyev-03.webp' } ] },
+  { name:'Капчагайская ГЭС', ll:[43.9130, 77.1030], works:[
+    { t:'Капчагайская ГЭС', by:'Абылхан Кастеев', y:'1972', img:'works/t/w-kasteyev-06.webp' } ] },
+  { name:'Кольсай', ll:[42.9917, 78.3239], works:[
+    { t:'Кольсай', by:'Уке Ажиев', y:'', img:'works/t/w-azhiev-06.webp' } ] },
+  { name:'Чарынский каньон', ll:[43.3540, 79.0750], works:[
+    { t:'Чарын', by:'Арий Школьный', y:'', img:'works/t/w-shkolny-10.webp' } ] },
+  { name:'Иссык-Куль, северный берег', ll:[42.6450, 77.0800], approx:true, works:[
+    { t:'Берег Иссык-Куля', by:'Салихитдин Айтбаев', y:'', img:'works/t/w-aitbayev-09.webp' } ] },
+];
+
+const map = L.map('map', { zoomControl:false, attributionControl:true, scrollWheelZoom:true }).setView([43.35, 77.6], 8);
+L.control.zoom({ position:'topright' }).addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:16, attribution:'© OpenStreetMap' }).addTo(map);
+
+let cur = -1, wi = 0; const markers = [];
+const list = document.getElementById('list'), card = document.getElementById('card');
+PLACES.forEach((p, i) => {
+  const icon = L.divIcon({ className:'', html:`<div class="pin${p.approx?' approx':''}" data-i="${i}">${i+1}</div>`, iconSize:[28,28], iconAnchor:[14,14] });
+  const m = L.marker(p.ll, { icon }).addTo(map).on('click', () => select(i));
+  m.bindTooltip(p.name, { className:'lbl', direction:'right', offset:[14,0] });
+  markers.push(m);
+  const li = document.createElement('li');
+  li.innerHTML = `<b>${i+1}</b>${p.name}<span class="n">${p.works.length > 1 ? p.works.length + ' работы' : ''}</span>`;
+  li.onclick = () => select(i, true);
+  list.appendChild(li);
+});
+map.fitBounds(L.latLngBounds(PLACES.map(p => p.ll)).pad(0.12));
+
+function render() {
+  if (cur < 0) { card.innerHTML = '<div class="empty">Выберите точку на карте — здесь появится картина, написанная на этом месте.</div>'; return; }
+  const p = PLACES[cur], w = p.works[wi];
+  card.innerHTML = `<img src="${A + w.img}" alt="${w.t}">
+    <div><h2>${w.t}</h2><div class="by">${w.by}</div></div>
+    <div class="meta">${w.y || 'Без даты'}</div>
+    <div class="place">Место: ${p.name}${p.approx ? ' (примерно)' : ''}</div>
+    ${p.works.length > 1 ? `<div class="pager"><button aria-label="Предыдущая">←</button><button aria-label="Следующая">→</button><span class="meta" style="align-self:center">${wi+1} / ${p.works.length}</span></div>` : ''}`;
+  const b = card.querySelectorAll('.pager button');
+  if (b.length) { b[0].onclick = () => { wi = (wi - 1 + p.works.length) % p.works.length; render(); }; b[1].onclick = () => { wi = (wi + 1) % p.works.length; render(); }; }
+}
+function select(i, fly) {
+  cur = i; wi = 0;
+  document.querySelectorAll('.pin').forEach(el => el.classList.toggle('on', +el.dataset.i === i));
+  [...list.children].forEach((li, k) => li.classList.toggle('on', k === i));
+  if (fly) map.flyTo(PLACES[i].ll, Math.max(map.getZoom(), 10), { duration:.8 });
+  render();
+}
+render();
+
+document.querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.toggle button').forEach(x => x.classList.toggle('on', x === b));
+  const plan = b.dataset.mode === 'plan';
+  document.getElementById('plan').style.display = plan ? 'block' : 'none';
+  document.getElementById('map').style.visibility = plan ? 'hidden' : 'visible';
+  document.getElementById('legend').style.display = plan ? 'none' : 'block';
+  document.getElementById('stamp').textContent = plan ? 'Верный · 1912' : 'Алматы и окрестности · сегодня';
+  list.style.display = plan ? 'none' : '';
+  card.innerHTML = plan ? '<div class="empty">План Верного 1912 года: крепость, Большая и Малая станицы, гимназии, базары и сады. В полной версии на него ложатся мастерская Хлудова и места ранних картин.</div>' : '';
+  if (!plan) { render(); setTimeout(() => map.invalidateSize(), 50); }
+});
+
+// drag to pan the scanned plan
+const plan = document.getElementById('plan'); let drag = null;
+plan.addEventListener('mousedown', e => { drag = { x:e.clientX, y:e.clientY, l:plan.scrollLeft, t:plan.scrollTop }; plan.style.cursor = 'grabbing'; e.preventDefault(); });
+addEventListener('mouseup', () => { drag = null; plan.style.cursor = 'grab'; });
+addEventListener('mousemove', e => { if (drag) { plan.scrollLeft = drag.l - (e.clientX - drag.x); plan.scrollTop = drag.t - (e.clientY - drag.y); } });
+</script>
+</body>
+</html>
