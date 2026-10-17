@@ -1472,7 +1472,7 @@ class Component extends DCLogic {
     const backdrops = DECADES.map((e, i) => {
       const on = s.index === 0 ? i === 0 : i === s.index - 1;
       return {
-        src: this._loaded.has(i) ? 'assets/bg/era-' + e.year + '.webp' : 'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
+        src: this._loaded.has(i) ? 'assets/bg/era-' + e.year + '.webp?v=2' : 'data:image/gif;base64,R0lGODlhAQABAAAAACw=',
         style: {
           position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
           filter: e.year >= 1990 ? 'none' : 'var(--filter-archive)',
