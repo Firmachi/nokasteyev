@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Карта мест — noKasteyev</title>
-<meta name="description" content="Где стоял мольберт: Медео, Иссык, Кольсай, Чарын и другие места Алматы и окрестностей, которые казахские художники вписали в названия картин. План Верного 1912 года.">
+<meta name="description" content="Где стоял мольберт: Медео, Иссык, Кольсай, Чарын и другие места Алматы и окрестностей, которые казахские художники вписали в названия картин.">
 <link rel="canonical" href="https://nokasteyev.art/karta">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -33,9 +33,6 @@
   h1 { margin:0; font-family:var(--font-display); font-weight:400; font-size:clamp(40px,6vh,72px); line-height:.95; letter-spacing:-.01em; }
   h1 i { color:var(--faint); }
   .lead { margin:0; font-family:var(--font-editorial); font-style:italic; font-size:clamp(17px,2.2vh,21px); line-height:1.45; color:var(--paper-dim); }
-  .toggle { display:flex; border:1px solid var(--line); }
-  .toggle button { flex:1; background:none; border:0; color:var(--faint); padding:10px 12px; font:inherit; font-size:11px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; }
-  .toggle button.on { background:var(--paper); color:var(--bg); }
   .card { border-top:1px solid var(--line); padding-top:18px; display:flex; flex-direction:column; gap:12px; min-height:260px; }
   .card img { width:100%; max-height:34vh; object-fit:contain; background:#0d0c0a; display:block; }
   .card h2 { margin:0; font-family:var(--font-editorial); font-style:italic; font-weight:400; font-size:24px; line-height:1.15; }
@@ -54,9 +51,7 @@
   .note { font-size:11px; line-height:1.6; color:var(--faint); margin-top:auto; }
   .note a { color:inherit; }
   main { position:relative; background:#e7e0d2; }
-  #map, #plan { position:absolute; inset:0; }
-  #plan { display:none; overflow:auto; background:#efe7d6; cursor:grab; }
-  #plan img { display:block; width:max(100%, 1180px); height:auto; mix-blend-mode:multiply; }
+  #map { position:absolute; inset:0; }
   .leaflet-tile-pane { filter:grayscale(1) sepia(.5) contrast(.92) brightness(1.03); }
   .leaflet-container { background:#e7e0d2; font-family:var(--font-ui); }
   .pin { width:28px; height:28px; border-radius:50%; background:var(--accent); color:var(--paper); border:2px solid var(--paper); display:flex; align-items:center; justify-content:center; font:500 12px var(--font-ui); box-shadow:0 2px 8px rgba(20,18,15,.35); transition:transform .2s; }
@@ -76,21 +71,15 @@
     <a class="back" href="/">← Галерея noKasteyev</a>
     <h1><i>Карта</i><br>мест</h1>
     <p class="lead">Где стоял мольберт: Медео, Иссык, Кольсай, Чарын — места, которые художники вписали в названия своих картин.</p>
-    <div class="toggle" role="tablist">
-      <button class="on" data-mode="map">Окрестности</button>
-      <button data-mode="plan">План Верного, 1912</button>
-    </div>
     <div class="card" id="card"></div>
     <ol class="places" id="list"></ol>
     <div class="note">
       Точки ставятся по названию картины. <span style="color:var(--ochre)">●</span> — место известно примерно.<br>
-      План: «План гор. Верного», сост. Поповым, 1912 — общественное достояние, <a href="https://commons.wikimedia.org/wiki/File:Almaty_1912.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.<br>
       Подложка: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">участники OpenStreetMap</a>.
     </div>
   </aside>
   <main>
     <div id="map"></div>
-    <div id="plan"><img src="assets/verny-1912.jpg" alt="План города Верного, 1912"></div>
     <div class="stamp" id="stamp">Алматы и окрестности · сегодня</div>
     <div class="legend" id="legend"><i style="background:#A2503A"></i>место из названия картины<br><i style="background:#B8862F"></i>место известно примерно</div>
   </main>
@@ -162,24 +151,6 @@ function select(i, fly) {
   render();
 }
 render();
-
-document.querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('.toggle button').forEach(x => x.classList.toggle('on', x === b));
-  const plan = b.dataset.mode === 'plan';
-  document.getElementById('plan').style.display = plan ? 'block' : 'none';
-  document.getElementById('map').style.visibility = plan ? 'hidden' : 'visible';
-  document.getElementById('legend').style.display = plan ? 'none' : 'block';
-  document.getElementById('stamp').textContent = plan ? 'Верный · 1912' : 'Алматы и окрестности · сегодня';
-  list.style.display = plan ? 'none' : '';
-  card.innerHTML = plan ? '<div class="empty">План Верного 1912 года: крепость, Большая и Малая станицы, гимназии, базары и сады. В полной версии на него ложатся мастерская Хлудова и места ранних картин.</div>' : '';
-  if (!plan) { render(); setTimeout(() => map.invalidateSize(), 50); }
-});
-
-// drag to pan the scanned plan
-const plan = document.getElementById('plan'); let drag = null;
-plan.addEventListener('mousedown', e => { drag = { x:e.clientX, y:e.clientY, l:plan.scrollLeft, t:plan.scrollTop }; plan.style.cursor = 'grabbing'; e.preventDefault(); });
-addEventListener('mouseup', () => { drag = null; plan.style.cursor = 'grab'; });
-addEventListener('mousemove', e => { if (drag) { plan.scrollLeft = drag.l - (e.clientX - drag.x); plan.scrollTop = drag.t - (e.clientY - drag.y); } });
 </script>
 </body>
 </html>
