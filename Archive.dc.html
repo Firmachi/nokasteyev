@@ -192,7 +192,7 @@
         <div style="min-height:0;flex:0 1 auto;display:flex;flex-direction:column">
           <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);border-top:1px solid var(--line-on-archive);padding-top:var(--space-2);margin-bottom:var(--space-3);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">
             <span>{{ era.artistsLabel }}</span>
-            <span data-artist-nav="true" style="display:flex;gap:var(--space-1);flex:0 0 auto">
+            <span data-artist-nav="true" data-on-archive="true" style="display:flex;gap:var(--space-1);flex:0 0 auto">
               <span data-artist-prev="true" style="transition:opacity 200ms"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-left" label="{{ L.prevPainters }}" on-archive="{{ true }}" on-click="{{ era.artistsPrev }}" hint-size="30px,30px"></x-import></span>
               <span data-artist-next="true" style="transition:opacity 200ms"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-right" label="{{ L.nextPainters }}" on-archive="{{ true }}" on-click="{{ era.artistsNext }}" hint-size="30px,30px"></x-import></span>
             </span>
