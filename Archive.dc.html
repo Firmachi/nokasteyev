@@ -190,11 +190,17 @@
           <x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.FactList" items="{{ era.facts }}" columns="{{ 2 }}" on-archive="{{ true }}" style="max-width:40ch" hint-size="100%,80px"></x-import>
         </sc-if>
         <div style="min-height:0;flex:0 1 auto;display:flex;flex-direction:column">
-          <div style="flex:0 0 auto;border-top:1px solid var(--line-on-archive);padding-top:var(--space-3);margin-bottom:var(--space-3);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">{{ era.artistsLabel }}</div>
-          <div data-nested-scroll="true" style="flex:1 1 auto;display:flex;align-items:stretch;gap:var(--space-5);min-height:0;overflow-x:auto;overflow-y:hidden;padding-bottom:var(--space-2)">
+          <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);border-top:1px solid var(--line-on-archive);padding-top:var(--space-2);margin-bottom:var(--space-3);font-family:var(--font-ui);font-size:var(--type-micro);letter-spacing:var(--tracking-micro);text-transform:uppercase;color:var(--paper-3)">
+            <span>{{ era.artistsLabel }}</span>
+            <span data-artist-nav="true" style="display:flex;gap:var(--space-1);flex:0 0 auto">
+              <span data-artist-prev="true" style="transition:opacity 200ms"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-left" label="{{ L.prevPainters }}" on-archive="{{ true }}" on-click="{{ era.artistsPrev }}" hint-size="30px,30px"></x-import></span>
+              <span data-artist-next="true" style="transition:opacity 200ms"><x-import component-from-global-scope="NoKasteyevDesignSystem_d8f09b.IconButton" name="arrow-right" label="{{ L.nextPainters }}" on-archive="{{ true }}" on-click="{{ era.artistsNext }}" hint-size="30px,30px"></x-import></span>
+            </span>
+          </div>
+          <div data-nested-scroll="true" data-artist-row="true" style="flex:0 0 auto;display:flex;align-items:flex-start;gap:var(--space-5);min-height:0;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:var(--space-2)">
             <sc-for list="{{ era.artists }}" as="artist" hint-placeholder-count="2">
               <button onClick="{{ artist.open }}" style="{{ artistTileStyle }}">
-                <img src="{{ artist.portrait }}" alt="" title="{{ artist.name }}" style="flex:1 1 auto;min-height:0;height:auto;width:100%;object-fit:cover;object-position:50% 25%;filter:var(--filter-archive);background:var(--surface-archive)">
+                <img src="{{ artist.portrait }}" alt="{{ artist.name }}" title="{{ artist.name }}" style="flex:0 0 auto;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 25%;filter:var(--filter-archive);background:var(--surface-archive)">
                 <span title="{{ artist.name }}" style="flex:0 0 auto;font-family:var(--font-display);font-size:clamp(12px,1.5vh,16px);line-height:1.2;color:var(--paper-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ artist.name }}</span>
               </button>
             </sc-for>
@@ -1164,6 +1170,7 @@ const OFFSETS = [0, 16, 48, 72];
 const LANGS = [{ id: 'en', label: 'EN' }, { id: 'kk', label: 'ҚАЗ' }, { id: 'ru', label: 'РУС' }];
 
 const UI_EN = {
+  prevPainters: 'Previous painters', nextPainters: 'More painters',
   srcHeading: "Sources", srcBio: "Biography", srcPhoto: "Portrait photo", srcTitle: "Title and date", sourcesNote: "Sources: artists’ biographies are retold from Wikipedia; free-licence portraits and Khludov’s titles come from Wikimedia Commons; some titles and dates are checked against the book 100 Masterpieces of the Art of Kazakhstan (2013). A work whose title or date cannot be confirmed is listed as Untitled or Undated. Links are given in each artist’s file and under each work.",
   eyebrow: 'A digital archive of Kazakh painting',
   tagline: 'A century of Almaty read across the easel — one decade at a time, the city in black and white, the canvases in full colour.',
@@ -1210,6 +1217,9 @@ class Component extends DCLogic {
 
   componentDidMount() {
     this.syncDocLang(this.state.lang);
+    this.onArtistScroll = e => { if (e.target && e.target.matches && e.target.matches('[data-artist-row]')) this.updateArtistNav(); };
+    document.addEventListener('scroll', this.onArtistScroll, true);
+    this.navTimer = setInterval(() => this.updateArtistNav(), 1000);
     this.mountRail();
     this.mountIntro();
     import('./i18n.js').then(m => { this.i18n = m.DICT; this.forceUpdate(); }).catch(() => {});
@@ -1261,6 +1271,8 @@ class Component extends DCLogic {
     if (this.onAnyScroll) requestAnimationFrame(this.onAnyScroll);
   }
   componentWillUnmount() {
+    document.removeEventListener('scroll', this.onArtistScroll, true);
+    clearInterval(this.navTimer);
     clearInterval(this.retry);
     document.removeEventListener('scroll', this.onAnyScroll, true);
     window.removeEventListener('keydown', this.onKey);
@@ -1357,6 +1369,21 @@ class Component extends DCLogic {
     document.documentElement.lang = id;
     document.title = titles[id] || titles.en;
   }
+  scrollArtists(year, dir) {
+    const row = document.querySelector('section[data-decade="' + year + '"] [data-artist-row]');
+    if (row) row.scrollBy({ left: dir * Math.max(120, row.clientWidth * 0.8), behavior: 'smooth' });
+  }
+  updateArtistNav() {
+    document.querySelectorAll('section[data-decade]').forEach(sec => {
+      const row = sec.querySelector('[data-artist-row]'), nav = sec.querySelector('[data-artist-nav]');
+      if (!row || !nav) return;
+      const over = row.scrollWidth - row.clientWidth > 4;
+      nav.style.visibility = over ? 'visible' : 'hidden';
+      const set = (el, on) => { if (el) { el.style.opacity = on ? 1 : 0.3; el.style.pointerEvents = on ? 'auto' : 'none'; } };
+      set(nav.querySelector('[data-artist-prev]'), row.scrollLeft > 4);
+      set(nav.querySelector('[data-artist-next]'), row.scrollLeft < row.scrollWidth - row.clientWidth - 4);
+    });
+  }
   srcRows(list) {
     const U = Object.assign({}, UI_EN, (this._T && this._T.ui) || {});
     const labels = { bio: U.srcBio, photo: U.srcPhoto, title: U.srcTitle };
@@ -1425,6 +1452,8 @@ class Component extends DCLogic {
         plateCount: works.length ? works.length + ' ' + plural(works.length, L.plateForms) : L.none,
         artists,
         artistsLabel: artists.length ? L.paintersHere : L.noPainters,
+        artistsPrev: () => this.scrollArtists(e.year, -1),
+        artistsNext: () => this.scrollArtists(e.year, 1),
         facts: [
           { label: L.factPlates, value: works.length ? String(works.length) : '—' },
           { label: L.factPainters, value: artists.length ? String(artists.length) : '—' }
@@ -1568,7 +1597,7 @@ class Component extends DCLogic {
         background: 'var(--paper-0)', border: '1px solid var(--line-hairline)'
       },
       artistTileStyle: {
-        flex: '0 0 clamp(96px,12vh,124px)', height: '100%', minHeight: 0,
+        flex: '0 0 auto', width: 'clamp(96px,12vh,124px)', minWidth: 0,
         display: 'flex', flexDirection: 'column', gap: 'var(--space-2)',
         background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left'
       },
